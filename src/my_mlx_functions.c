@@ -1,4 +1,4 @@
-# include "minirt.h"
+# include "../minirt.h"
 
 int	close_mlx(t_data *data)
 {

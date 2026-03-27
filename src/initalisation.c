@@ -1,4 +1,4 @@
-# include "minirt.h"
+# include "../minirt.h"
 
 void	memset_t_data(t_data *data)
 {

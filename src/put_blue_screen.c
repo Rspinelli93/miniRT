@@ -1,4 +1,4 @@
-# include "minirt.h"
+# include "../minirt.h"
 
 int	put_blue_screen(t_data *data)
 {

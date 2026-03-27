@@ -1,48 +1,66 @@
-NAME = minirt
-SRC_DIR = src
-OBJ_DIR = obj
+NAME        = minirt
 
-SRCS = $(wildcard $(SRC_DIR)/*.c)
+# --- Manual File Listing ---
+SRCS        = main.c \
+              src/initalisation.c \
+              src/my_mlx_functions.c \
+              src/put_blue_screen.c \
+              src/parsing/parse.c
 
-OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-INCLUDE = $(SRC_DIR)/minirt.h
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 -O3 -ffast-math
-MLX = ./minilibx_linux
-PRINTF = ./libftprintf
+# This converts src/xxx.c to obj/xxx.o
+OBJS        = $(SRCS:src/%.c=obj/%.o)
 
-MLX_LNK = -L $(MLX) -lmlx_Linux -lXext -lX11 -lm
-PRINTF_LNK = -L $(PRINTF) -lftprintf
+# --- Compilation Settings ---
+CC          = cc
+CFLAGS      = -Wall -Wextra -Werror -g3 -O3 -ffast-math
+INCLUDE     = -Isrc -I./minilibx_linux -I./libft -I./libftprintf -I./gnl
+RM          = rm -f
 
-MLX_INC = I $(MLX)
-MLX_LIB = $(MLX)/libmlx.a
-PRINTF_LIB = $(PRINTF)/libftprintf.a
+# --- Library Paths ---
+MLX_LIB     = ./minilibx_linux/libmlx.a
+PRINTF_LIB  = ./libftprintf/libftprintf.a
+LIBFT_LIB   = ./libft/libft.a
+GNL_LIB     = ./gnl/get_next_line.a
 
-$(NAME) : $(MLX_LIB) $(PRINTF_LIB) $(OBJS)
-	gcc $(CFLAGS) $(OBJS) $(MLX_LNK) $(PRINTF_LNK) -o $(NAME)
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE) | $(OBJ_DIR)
-	gcc $(CFLAGS) -I$(SRC_DIR) -c $< -o $@
-
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
-
-$(MLX_LIB) :
-	make -C $(MLX)
-
-$(PRINTF_LIB) :
-	make -C $(PRINTF)
+# Linking: MiniLibX usually needs these specific flags for X11
+MLX_FLAGS   = -L./minilibx_linux -lmlx_Linux -lXext -lX11 -lm
 
 all : $(NAME)
 
-fclean : clean
-	$(RM) $(NAME)
-	make clean -C $(MLX)
-	make fclean -C $(PRINTF)
+$(NAME) : $(MLX_LIB) $(PRINTF_LIB) $(LIBFT_LIB) $(GNL_LIB) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) $(PRINTF_LIB) $(LIBFT_LIB) $(GNL_LIB) -o $(NAME)
+
+# --- Manual Directory Creation ---
+# Add every new subdirectory to this mkdir command
+obj/%.o: src/%.c
+	@mkdir -p obj obj/parsing
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+
+$(MLX_LIB) :
+	make -C ./minilibx_linux
+
+$(PRINTF_LIB) :
+	make -C ./libftprintf
+
+$(LIBFT_LIB) :
+	make -C ./libft
+
+$(GNL_LIB) :
+	make -C ./gnl
 
 clean :
-	$(RM) -rf $(OBJ_DIR)
-	make clean -C $(MLX)
-	make clean -C $(PRINTF)
+	$(RM) -rf obj
+	make clean -C ./minilibx_linux
+	make clean -C ./libftprintf
+	make clean -C ./libft
+	make clean -C ./gnl
+
+fclean : clean
+	$(RM) $(NAME)
+	make fclean -C ./libftprintf
+	make fclean -C ./libft
+	make fclean -C ./gnl
 
 re : fclean all
+
+.PHONY: all clean fclean re
