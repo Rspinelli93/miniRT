@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 19:32:43 by rick              #+#    #+#             */
-/*   Updated: 2026/03/27 21:24:10 by rick             ###   ########.fr       */
+/*   Updated: 2026/03/30 15:44:15 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ t_data	*init_data(void)
 	data = ft_calloc(sizeof(data), 1);
 	if (!data)
 		return (NULL);
-	if (init_mlx(&data) != EXIT_SUCCESS)
-		return (EXIT_FAILURE);
+	if (init_mlx(&data) != true)
+		return (false);
 	return (data);
 }
 

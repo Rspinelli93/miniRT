@@ -16,5 +16,5 @@ int	put_blue_screen(t_data *data)
 		}
 		y++;
 	}
-	return (EXIT_SUCCESS);
+	return (true);
 }

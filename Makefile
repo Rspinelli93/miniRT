@@ -6,6 +6,10 @@ SRCS        = main.c \
               src/my_mlx_functions.c \
               src/put_blue_screen.c \
               src/parsing/parse.c \
+			  src/parsing/sub_parsing.c \
+			  src/parsing/ft_atof.c
+
+              src/parsing/parse.c \
 			  src/free/free.c
 
 # This converts src/xxx.c to obj/xxx.o
