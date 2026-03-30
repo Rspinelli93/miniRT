@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 19:13:18 by rick              #+#    #+#             */
-/*   Updated: 2026/03/30 16:05:19 by rick             ###   ########.fr       */
+/*   Updated: 2026/03/30 21:15:00 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ bool	parse(t_data *data, char *doc)
 static bool	validate_tokens(t_data *data, char **tokens)
 {
 	if (!ft_strncmp("A", tokens[0], 2))
-		return (parse_ambient_light(data, tokens), true);
+		return (printf("ambiant light\n"), parse_ambient_light(data, tokens));
 	else if (!ft_strncmp("C", tokens[0], 2))
-		return (printf("Success: C\n"), true);
+		return (printf("camera\n"), parse_camera(data, tokens));
 	else if (!ft_strncmp("L", tokens[0], 2))
-		return (printf("Success: L\n"), true);
+		return (printf("light\n"), parse_light(data, tokens));
 	else if (!ft_strncmp("pl", tokens[0], 3))
 		return (printf("Success: sp\n"), true);
 	else if (!ft_strncmp("sp", tokens[0], 3))
@@ -78,21 +78,23 @@ char	**get_text(char *address)
 	fd = open(address, O_RDONLY);
 	if (fd < 0)
 		return (perror("Not valid doc address"), NULL);
-	while (i < size)
+	while (i < size - 1)
 	{
 		arr[i] = get_next_line(fd);
 		if (!arr[i])
 			return (perror("GNL Err"), NULL);
+		printf("%s\n", arr[i]);
 		i++;
 	}
 	arr[i] = NULL;
 	close(fd);
+	printf("here ok \n");
 	return (arr);
 }
 
 /*
 Function to get the amount of lines in the document.
-Opens the documents and reads byte by byte checking 
+Opens the documents and reads byte by byte checking
 for new lines incrementing the size value.
 If size is 0 at the end of read iteration the file is empty
 and the error is printed.

@@ -53,6 +53,7 @@ struct s_ambient_light
 
 struct s_camera
 {
+	int		fov;
 	float	x; //also negative, from where to where?
 	float	y;
 	float	z;
@@ -67,9 +68,9 @@ struct s_light
 	float	y;
 	float	z;
 	float	brightness; //between 0 and 1
-//	int		r; //between 0 and 255 BONUS
-//	int		g; //between 0 and 255
-//	int		b; //between 0 and 255
+	int		r; //between 0 and 255 BONUS
+	int		g; //between 0 and 255
+	int		b; //between 0 and 255
 };
 
 struct s_sphere
@@ -128,11 +129,19 @@ int		put_blue_screen(t_data *data);
 //* --------- PARSING ---------
 bool	parse(t_data *data, char *doc);
 char	**get_text(char *address);
+
+// sub_parsing
 int		is_valid_float(const char *str);
 double	ft_atof(const char *str);
 bool	parse_RGB(int *r, int *g, int *b, char *str);
+bool	parse_xyz(float *x, float *y, float *z, char *str);
+bool	parse_xyz_norm(float *x, float *y, float *z, char *str);
 bool	parse_ratio_light(float *ratio, char *str);
+bool	parse_positive_nb(float *nb, char *str);
+bool	parse_view_range(int *nb, char *str);
 bool	parse_ambient_light(t_data *data, char **splitted);
+bool	parse_camera(t_data *data, char **splitted);
+bool	parse_light(t_data *data, char **splitted);
 
 
 #endif
