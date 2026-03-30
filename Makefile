@@ -5,7 +5,10 @@ SRCS        = main.c \
               src/initalisation.c \
               src/my_mlx_functions.c \
               src/put_blue_screen.c \
-              src/parsing/parse.c
+              src/parsing/parse.c \
+			  src/parsing/sub_parsing.c \
+			  src/parsing/ft_atof.c
+
 
 # This converts src/xxx.c to obj/xxx.o
 OBJS        = $(SRCS:src/%.c=obj/%.o)

@@ -14,7 +14,7 @@ void	memset_t_data(t_data *data)
 int	validate_args(int argc, char *argv[])
 {
 	if (argc && argv[0])
-		return (EXIT_SUCCESS);
+		return (true);
 
-	return (EXIT_FAILURE);
+	return (false);
 }

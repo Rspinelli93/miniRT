@@ -124,5 +124,10 @@ int		put_blue_screen(t_data *data);
 
 //* --------- PARSING ---------
 char	**get_text(char *address);
+int		is_valid_float(const char *str);
+double	ft_atof(const char *str);
+bool	parse_RGB(int *r, int *g, int *b, char *str);
+bool	parse_ratio_light(float *ratio, char *str);
+bool	parse_ambient_light(t_data *data, char **splitted);
 
 #endif
