@@ -1,6 +1,7 @@
 # include "minirt.h"
 
-int	main(int argc, char **argv)
+//* TEST FOR WINDOW CREATION
+/* int	main(int argc, char **argv)
 {
 	t_data	data;
 
@@ -14,4 +15,29 @@ int	main(int argc, char **argv)
 	setup_hooks(&data);
 	mlx_loop(data.mlx);
 	return (EXIT_SUCCESS);
+}
+ */
+
+// *TEST FOR GET_TEXT
+/* int	main(void)
+{
+	int i = 0;
+	char **arr;
+
+	arr = get_text("./hola.txt");
+	if (!arr)
+		return (0);
+	while (arr[i])
+	{
+		printf("%s", arr[i]);
+		i++;
+	}
+	return (0);
+} */
+
+int main(void)
+{
+	t_data data;
+	parse(&data, "./hola.txt");
+	return (0);
 }

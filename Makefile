@@ -5,14 +5,15 @@ SRCS        = main.c \
               src/initalisation.c \
               src/my_mlx_functions.c \
               src/put_blue_screen.c \
-              src/parsing/parse.c
+              src/parsing/parse.c \
+			  src/free/free.c
 
 # This converts src/xxx.c to obj/xxx.o
 OBJS        = $(SRCS:src/%.c=obj/%.o)
 
 # --- Compilation Settings ---
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror -g3 -O3 -ffast-math
+CFLAGS      = -Wall -Wextra -Werror -g -ffast-math
 INCLUDE     = -Isrc -I./minilibx_linux -I./libft -I./libftprintf -I./gnl
 RM          = rm -f
 
@@ -33,7 +34,7 @@ $(NAME) : $(MLX_LIB) $(PRINTF_LIB) $(LIBFT_LIB) $(GNL_LIB) $(OBJS)
 # --- Manual Directory Creation ---
 # Add every new subdirectory to this mkdir command
 obj/%.o: src/%.c
-	@mkdir -p obj obj/parsing
+	@mkdir -p obj obj/parsing obj/free
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(MLX_LIB) :
