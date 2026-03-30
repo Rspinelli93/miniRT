@@ -35,12 +35,12 @@ bool	parse_RGB(int *r, int *g, int *b, char *str)
 				*b = tmp;
 		}
 		else
-			return(free(splitted_RGB), perror("Wrong color code\n"), false);
+			return(free_split(splitted_RGB), perror("Wrong color code\n"), false);
 		i++;
 	}
 	if (i != 3 || splitted_RGB[i])
-		return (free(splitted_RGB), perror("Wrong color code\n"), false);
-	free(splitted_RGB);
+		return (free_split(splitted_RGB), perror("Wrong color code\n"), false);
+	free_split(splitted_RGB);
 	return (true);
 }
 

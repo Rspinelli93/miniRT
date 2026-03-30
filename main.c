@@ -39,5 +39,8 @@ int main(void)
 {
 	t_data data;
 	parse(&data, "./hola.txt");
+	printf("We have an ambient light ");
+	printf("his ratio is %f", data.ambient->light_ratio);
+	printf("and the rgb values are : %d %d %d \n", data.ambient->r, data.ambient->g, data.ambient->b);
 	return (0);
 }

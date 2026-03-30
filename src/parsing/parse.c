@@ -6,7 +6,7 @@
 /*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 19:13:18 by rick              #+#    #+#             */
-/*   Updated: 2026/03/30 15:47:16 by rick             ###   ########.fr       */
+/*   Updated: 2026/03/30 16:05:19 by rick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ bool	parse(t_data *data, char *doc)
 
 static bool	validate_tokens(t_data *data, char **tokens)
 {
-	(void)data;
 	if (!ft_strncmp("A", tokens[0], 2))
-		return (printf("Success: A\n"), true);
+		return (parse_ambient_light(data, tokens), true);
 	else if (!ft_strncmp("C", tokens[0], 2))
 		return (printf("Success: C\n"), true);
 	else if (!ft_strncmp("L", tokens[0], 2))
