@@ -6,7 +6,7 @@
 /*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 19:13:18 by rick              #+#    #+#             */
-/*   Updated: 2026/03/30 21:15:00 by glucken          ###   ########.fr       */
+/*   Updated: 2026/03/30 23:04:35 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	**get_text(char *address)
 	fd = open(address, O_RDONLY);
 	if (fd < 0)
 		return (perror("Not valid doc address"), NULL);
-	while (i < size - 1)
+	while (i < size - 1) // I put a minus 1 because I had an error but maybe we shouldn't
 	{
 		arr[i] = get_next_line(fd);
 		if (!arr[i])

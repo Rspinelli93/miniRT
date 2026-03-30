@@ -133,7 +133,7 @@ char	**get_text(char *address);
 // sub_parsing
 int		is_valid_float(const char *str);
 double	ft_atof(const char *str);
-bool	parse_RGB(int *r, int *g, int *b, char *str);
+bool	parse_rgb(int *r, int *g, int *b, char *str);
 bool	parse_xyz(float *x, float *y, float *z, char *str);
 bool	parse_xyz_norm(float *x, float *y, float *z, char *str);
 bool	parse_ratio_light(float *ratio, char *str);
@@ -142,6 +142,10 @@ bool	parse_view_range(int *nb, char *str);
 bool	parse_ambient_light(t_data *data, char **splitted);
 bool	parse_camera(t_data *data, char **splitted);
 bool	parse_light(t_data *data, char **splitted);
+
+
+//* ---------- FREE ----------
+void	free_data(t_data *data);
 
 
 #endif
