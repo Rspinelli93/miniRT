@@ -1,4 +1,4 @@
-# include "minirt.h"
+# include "../minirt.h"
 
 int	close_mlx(t_data *data)
 {
@@ -11,7 +11,7 @@ int	close_mlx(t_data *data)
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 	}
-	exit(EXIT_SUCCESS);
+	exit(true);
 }
 
 void	my_mlx_put_pixel(t_data *data, int x, int y, int color)
@@ -26,19 +26,19 @@ int	init_mlx(t_data *data)
 {
 	data->mlx = mlx_init();
 	if (!data->mlx)
-		return (ft_printf("MLX INIT FAIL\n"), EXIT_FAILURE);
+		return (ft_printf("MLX INIT FAIL\n"), false);
 	data->win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT,
 			"Welcome to a Magic World");
 	if (!data->win)
-		return (ft_printf("NEW WIN FAIL\n"), EXIT_FAILURE);
+		return (ft_printf("NEW WIN FAIL\n"), false);
 	data->img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!data->img)
-		return (ft_printf("NEW IMG FAIL\n"), EXIT_FAILURE);
+		return (ft_printf("NEW IMG FAIL\n"), false);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
 			&data->line_length, &data->endian);
 	if (!data->addr)
-		return (ft_printf("GET ADDR FAIL\n"), EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+		return (ft_printf("GET ADDR FAIL\n"), false);
+	return (true);
 }
 
 static int	key_event(int keycode, t_data *data)

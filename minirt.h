@@ -5,12 +5,18 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <math.h>
-# include "../minilibx_linux/mlx.h"
-# include "../libftprintf/libftprintf.h"
+# include <stdbool.h>
+# include <fcntl.h>
+# include "./libft/libft.h"
+# include "./gnl/get_next_line.h"
+# include "./minilibx_linux/mlx.h"
+# include "./libftprintf/libftprintf.h"
 
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 600
 # define KEY_ESC 65307
+# define SUCCESS 1
+# define FAILURE 0
 
 typedef struct s_data			t_data;
 typedef struct s_ambient_light	t_ambient_light;
@@ -89,7 +95,7 @@ struct s_plane
 	int			r; //between 0 and 255 BONUS
 	int			g; //between 0 and 255
 	int			b; //between 0 and 255
-	t_plane	*next;
+	t_plane		*next;
 };
 
 struct s_cylinder
@@ -110,6 +116,7 @@ struct s_cylinder
 
 void	memset_t_data(t_data *data);
 int		validate_args(int argc, char *argv[]);
+void	free_split(char **arr);
 
 //* --------- MINILIBX ---------
 int		close_mlx(t_data *data);
@@ -117,5 +124,15 @@ void	my_mlx_put_pixel(t_data *data, int x, int y, int color);
 int		init_mlx(t_data *data);
 void	setup_hooks(t_data *data);
 int		put_blue_screen(t_data *data);
+
+//* --------- PARSING ---------
+bool	parse(t_data *data, char *doc);
+char	**get_text(char *address);
+int		is_valid_float(const char *str);
+double	ft_atof(const char *str);
+bool	parse_RGB(int *r, int *g, int *b, char *str);
+bool	parse_ratio_light(float *ratio, char *str);
+bool	parse_ambient_light(t_data *data, char **splitted);
+
 
 #endif
