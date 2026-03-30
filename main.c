@@ -1,6 +1,6 @@
 # include "minirt.h"
 
-/* int	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_data	data;
 
@@ -14,21 +14,4 @@
 	setup_hooks(&data);
 	mlx_loop(data.mlx);
 	return (EXIT_SUCCESS);
-}
- */
-
-int	main(void)
-{
-	int i = 0;
-	char **arr;
-
-	arr = get_text("./hola.txt");
-	if (!arr)
-		return (0);
-	while (arr[i])
-	{
-		printf("%s", arr[i]);
-		i++;
-	}
-	return (0);
 }
