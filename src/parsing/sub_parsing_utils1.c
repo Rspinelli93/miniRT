@@ -19,7 +19,7 @@ bool	parse_rgb(int *r, int *g, int *b, char *str)
 	int		rgb[3];
 
 	splitted_rgb = ft_split(str, ',');
-	if (!splitted_RGB)
+	if (!splitted_rgb)
 		return (perror("Malloc Fail\n"), false);
 	i = 0;
 	while (splitted_rgb[i] && i < 3)

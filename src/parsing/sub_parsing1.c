@@ -25,7 +25,7 @@ bool	parse_ambient_light(t_data *data, char **splitted)
 	if (!(splitted[1] && parse_ratio_light(&(data->ambient->light_ratio),
 				splitted[1])))
 		return (false);
-	if (!(splitted[2] && parse_RGB(&(data->ambient->r), &(data->ambient->g),
+	if (!(splitted[2] && parse_rgb(&(data->ambient->r), &(data->ambient->g),
 				&(data->ambient->b), splitted[2])))
 		return (false);
 	if (splitted[3])
@@ -73,7 +73,7 @@ bool	parse_light(t_data *data, char **splitted)
 	if (!(splitted[2] && parse_ratio_light(&(data->light->brightness),
 				splitted[2])))
 		return (false);
-	if (!(splitted[3] && parse_RGB(&(data->light->r), &(data->light->g),
+	if (!(splitted[3] && parse_rgb(&(data->light->r), &(data->light->g),
 				&(data->light->b), splitted[3])))
 		return (false);
 	if (splitted[3])

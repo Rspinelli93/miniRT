@@ -38,9 +38,9 @@ struct s_data
 	t_ambient_light	*ambient;
 	t_camera		*camera;
 	t_light			*light;
-	t_sphere		*sphere;
-	t_plane			*plane;
-	t_cylinder		*cylinder;
+	t_list			*sphere_list;
+	t_list			*plane_list;
+	t_list			*cylinder_list;
 };
 
 struct s_ambient_light
@@ -142,6 +142,7 @@ bool	parse_view_range(int *nb, char *str);
 bool	parse_ambient_light(t_data *data, char **splitted);
 bool	parse_camera(t_data *data, char **splitted);
 bool	parse_light(t_data *data, char **splitted);
+bool	parse_sphere(t_data *data, char **splitted);
 
 
 //* ---------- FREE ----------

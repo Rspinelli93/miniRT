@@ -6,7 +6,7 @@
 /*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 19:13:18 by rick              #+#    #+#             */
-/*   Updated: 2026/03/30 23:04:35 by glucken          ###   ########.fr       */
+/*   Updated: 2026/03/31 09:30:43 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static bool	validate_tokens(t_data *data, char **tokens)
 	else if (!ft_strncmp("pl", tokens[0], 3))
 		return (printf("Success: sp\n"), true);
 	else if (!ft_strncmp("sp", tokens[0], 3))
-		return (printf("Success: cl\n"), true);
+		return (printf("sphere\n"), parse_sphere(data, tokens));
 	else if (!ft_strncmp("cy", tokens[0], 3))
 		return (printf("Success: cy\n"), true);
 	else if (!ft_strncmp("\n", tokens[0], 2))
