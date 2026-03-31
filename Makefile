@@ -11,7 +11,8 @@ SRCS        = main.c \
 			  src/parsing/sub_parsing_utils1.c \
 			  src/parsing/sub_parsing_utils2.c \
 			  src/parsing/ft_atof.c \
-			  src/free/free.c
+			  src/free/free.c \
+			  src/free/safe_free_lst.c
 
 # This converts src/xxx.c to obj/xxx.o
 OBJS        = $(SRCS:src/%.c=obj/%.o)

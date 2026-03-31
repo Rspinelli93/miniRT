@@ -41,4 +41,7 @@ void	free_data(t_data *data)
 	safe_free((void **)&(data->ambient));
 	safe_free((void **)&(data->camera));
 	safe_free((void **)&(data->light));
+	ft_safe_lstclear(&(data->sphere_list), safe_free);
+	ft_safe_lstclear(&(data->plane_list), safe_free);
+	ft_safe_lstclear(&(data->cylinder_list), safe_free);
 }

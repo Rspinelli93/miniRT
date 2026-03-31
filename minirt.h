@@ -118,6 +118,8 @@ struct s_cylinder
 void	memset_t_data(t_data *data);
 int		validate_args(int argc, char *argv[]);
 void	free_split(char **arr);
+void	ft_safe_lstdelone(t_list *lst, void (*del)(void **));
+void	ft_safe_lstclear(t_list **lst, void (*del)(void **));
 
 //* --------- MINILIBX ---------
 int		close_mlx(t_data *data);
@@ -143,6 +145,8 @@ bool	parse_ambient_light(t_data *data, char **splitted);
 bool	parse_camera(t_data *data, char **splitted);
 bool	parse_light(t_data *data, char **splitted);
 bool	parse_sphere(t_data *data, char **splitted);
+bool	parse_plane(t_data *data, char **splitted);
+bool	parse_cylinder(t_data *data, char **splitted);
 
 
 //* ---------- FREE ----------

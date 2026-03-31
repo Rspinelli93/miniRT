@@ -46,12 +46,12 @@ static bool	validate_tokens(t_data *data, char **tokens)
 		return (printf("camera\n"), parse_camera(data, tokens));
 	else if (!ft_strncmp("L", tokens[0], 2))
 		return (printf("light\n"), parse_light(data, tokens));
-	else if (!ft_strncmp("pl", tokens[0], 3))
-		return (printf("Success: sp\n"), true);
 	else if (!ft_strncmp("sp", tokens[0], 3))
 		return (printf("sphere\n"), parse_sphere(data, tokens));
+	else if (!ft_strncmp("pl", tokens[0], 3))
+		return (printf("plane\n"), parse_plane(data, tokens));
 	else if (!ft_strncmp("cy", tokens[0], 3))
-		return (printf("Success: cy\n"), true);
+		return (printf("cylinder\n"), parse_cylinder(data, tokens));
 	else if (!ft_strncmp("\n", tokens[0], 2))
 		return (true);
 	return (perror("Wrong data format"), false);
@@ -88,7 +88,6 @@ char	**get_text(char *address)
 	}
 	arr[i] = NULL;
 	close(fd);
-	printf("here ok \n");
 	return (arr);
 }
 

@@ -12,9 +12,9 @@ void	memset_t_data(t_data *data)
 	data->ambient = NULL;
 	data->camera = NULL;
 	data->light = NULL;
-	data->sphere = NULL;
-	data->plane = NULL;
-	data->cylinder = NULL;
+	data->sphere_list = NULL;
+	data->plane_list = NULL;
+	data->cylinder_list = NULL;
 }
 
 int	validate_args(int argc, char *argv[])
