@@ -14,19 +14,13 @@
 
 bool	parse_ambient_light(t_data *data, char **splitted)
 {
-	t_ambient_light	*ambient;
-
-	if (data->ambient)
+	if (init_ambient_light(data) == false)
 		return (perror("More than one Ambient light\n"), false);
-	ambient = (t_ambient_light *) malloc(sizeof(t_ambient_light));
-	if (!ambient)
-		return (perror("Malloc Fail\n"), false);
-	data->ambient = ambient;
 	if (!(splitted[1] && parse_ratio_light(&(data->ambient->light_ratio),
 				splitted[1])))
 		return (printf(" error on Ambient Light line.\n"), false);
-	if (!(splitted[2] && parse_rgb(&(data->ambient->r), &(data->ambient->g),
-				&(data->ambient->b), splitted[2])))
+	if (!(splitted[2] && parse_rgb(&(data->ambient->rgb->r), &(data->ambient->rgb->g),
+				&(data->ambient->rgb->b), splitted[2])))
 		return (printf(" error on Ambient Light line.\n"), false);
 	if (splitted[3])
 		return (printf(" error on Ambient Light line: too many arguments.\n"), false);
@@ -35,19 +29,13 @@ bool	parse_ambient_light(t_data *data, char **splitted)
 
 bool	parse_camera(t_data *data, char **splitted)
 {
-	t_camera	*camera;
-
-	if (data->camera)
+	if (init_camera(data) == false)
 		return (perror("More than one Camera\n"), false);
-	camera = (t_camera *)malloc(sizeof(t_camera));
-	if (!camera)
-		return (perror("Malloc fail\n"), false);
-	data->camera = camera;
-	if (!(splitted[1] && parse_xyz(&(data->camera->x), &(data->camera->y),
-				&(data->camera->z), splitted[1])))
+	if (!(splitted[1] && parse_xyz(&(data->camera->origin->x), &(data->camera->origin->y),
+				&(data->camera->origin->z), splitted[1])))
 		return (printf(" error on Camera line.\n"), false);
-	if (!(splitted[2] && parse_xyz_norm(&(data->camera->x_orientation),
-				&(data->camera->y_orientation), &(data->camera->z_orientation),
+	if (!(splitted[2] && parse_xyz_norm(&(data->camera->vector->x),
+				&(data->camera->vector->y), &(data->camera->vector->z),
 				splitted[2])))
 		return (printf(" error on Camera line.\n"), false);
 	if (!(splitted[3] && parse_view_range(&(data->camera->fov), splitted[3])))
@@ -59,22 +47,16 @@ bool	parse_camera(t_data *data, char **splitted)
 
 bool	parse_light(t_data *data, char **splitted)
 {
-	t_light	*light;
-
-	if (data->light)
+	if (init_light(data) == false)
 		return (perror("More than one Light.\n"), false);
-	light = (t_light *) malloc(sizeof(t_light));
-	if (!light)
-		return (perror("Malloc Fail\n"), false);
-	data->light = light;
-	if (!(splitted[1] && parse_xyz(&(data->light->x), &(data->light->y),
-				&(data->light->z), splitted[1])))
+	if (!(splitted[1] && parse_xyz(&(data->light->origin->x), &(data->light->origin->y),
+				&(data->light->origin->z), splitted[1])))
 		return (printf(" error on Light line.\n"), false);
 	if (!(splitted[2] && parse_ratio_light(&(data->light->brightness),
 				splitted[2])))
 		return (printf(" error on Light line.\n"), false);
-	if (!(splitted[3] && parse_rgb(&(data->light->r), &(data->light->g),
-				&(data->light->b), splitted[3])))
+	if (!(splitted[3] && parse_rgb(&(data->light->rgb->r), &(data->light->rgb->g),
+				&(data->light->rgb->b), splitted[3])))
 		return (printf(" error on Light line.\n"), false);
 	if (splitted[4])
 		return (printf("too many arguments error on Light line.\n"), false);

@@ -13,6 +13,8 @@ SRCS        = main.c \
 			  src/parsing/ft_atof.c \
 			  src/free/free.c \
 			  src/free/safe_free_lst.c
+			  src/init/init.c \
+			  src/init/init_shapes.c \
 
 # This converts src/xxx.c to obj/xxx.o
 OBJS        = $(SRCS:src/%.c=obj/%.o)

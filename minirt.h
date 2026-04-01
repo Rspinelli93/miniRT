@@ -25,6 +25,9 @@ typedef struct s_light			t_light;
 typedef struct s_sphere			t_sphere;
 typedef struct s_plane			t_plane;
 typedef struct s_cylinder		t_cylinder;
+typedef struct s_vector			t_vector;
+typedef struct s_point			t_point;
+typedef struct s_color			t_color;
 
 struct s_data
 {
@@ -43,83 +46,81 @@ struct s_data
 	t_list			*cylinder_list;
 };
 
+struct s_vector
+{
+	float	x;
+	float	y;
+	float	z;
+};
+
+struct s_point
+{
+	float	x;
+	float	y;
+	float	z;
+};
+
+struct s_color
+{
+	int	r;
+	int	g;
+	int	b;
+};
+
 struct s_ambient_light
 {
-	float	light_ratio; //between 0 and 1
-	int		r; //between 0 and 255
-	int		g; //between 0 and 255
-	int		b; //between 0 and 255
+	float	light_ratio;
+	t_color	*rgb;
 };
 
 struct s_camera
 {
-	int		fov;
-	float	x; //also negative, from where to where?
-	float	y;
-	float	z;
-	float	x_orientation; //between -1 and 1
-	float	y_orientation; //between -1 and 1
-	float	z_orientation; //between -1 and 1
+	int			fov;
+	t_point		*origin;
+	t_vector	*vector;
 };
 
 struct s_light
 {
-	float	x; //also negative, from where to where?
-	float	y;
-	float	z;
-	float	brightness; //between 0 and 1
-	int		r; //between 0 and 255 BONUS
-	int		g; //between 0 and 255
-	int		b; //between 0 and 255
+	float		brightness;
+	t_point		*origin;
+	t_color		*rgb;
 };
 
 struct s_sphere
 {
-	float		x; //also negative, from where to where?
-	float		y;
-	float		z;
-	float		diameter; //between 0 and 1
-	int			r; //between 0 and 255 BONUS
-	int			g; //between 0 and 255
-	int			b; //between 0 and 255
-	t_sphere	*next;
+	float		diameter;
+	t_point		*center;
+	t_color		*rgb;
 };
 
 struct s_plane
 {
-	float		x; //also negative, from where to where?
-	float		y; //coordenates of the center
-	float		z;
-	float		x_vector; //between -1 and 1
-	float		y_vector; //between -1 and 1
-	float		z_vector; //between -1 and 1
-	int			r; //between 0 and 255 BONUS
-	int			g; //between 0 and 255
-	int			b; //between 0 and 255
-	t_plane		*next;
+	t_point		*center;
+	t_color		*rgb;
+	t_vector	*vector;
 };
 
 struct s_cylinder
 {
-	float		x; //also negative, from where to where?
-	float		y; //coordenates of the center
-	float		z;
 	float		diameter;
 	float		height;
-	int			r; //between 0 and 255 BONUS
-	int			g; //between 0 and 255
-	int			b; //between 0 and 255
-	float		x_axis; //between -1 and 1
-	float		y_axis; //between -1 and 1
-	float		z_axis; //between -1 and 1
-	t_cylinder	*next;
+	t_point		*center;
+	t_color		*rgb;
+	t_vector	*vector;
 };
 
+//* ---------- INIT ----------
+
+bool	init_light(t_data *data);
 void	memset_t_data(t_data *data);
+bool	init_ambient_light(t_data *data);
+bool	init_camera(t_data *data);
+bool	init_sphere(t_sphere *sphere);
+bool	init_plane(t_plane *plane);
+bool	init_cylinder(t_cylinder *cylinder);
 int		validate_args(int argc, char *argv[]);
-void	free_split(char **arr);
-void	ft_safe_lstdelone(t_list *lst, void (*del)(void **));
-void	ft_safe_lstclear(t_list **lst, void (*del)(void **));
+
 
 //* --------- MINILIBX ---------
 int		close_mlx(t_data *data);
@@ -150,7 +151,10 @@ bool	parse_cylinder(t_data *data, char **splitted);
 
 
 //* ---------- FREE ----------
-void	free_data(t_data *data);
 
+void	free_data(t_data *data);
+void	free_split(char **arr);
+void	ft_safe_lstdelone(t_list *lst, void (*del)(void **));
+void	ft_safe_lstclear(t_list **lst, void (*del)(void **));
 
 #endif

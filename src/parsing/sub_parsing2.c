@@ -17,17 +17,17 @@ bool	parse_sphere(t_data *data, char **splitted)
 	t_sphere	*sphere;
 	t_list		*list;
 
-	sphere = (t_sphere *)malloc(sizeof(t_sphere));
-	if (!sphere)
-		return (perror("Malloc Fail\n"), false);
-	if (!(splitted[1] && parse_xyz(&(sphere->x), &(sphere->y),
-				&(sphere->z), splitted[1])))
+	sphere = NULL;
+	if (!init_add_sphere(data, sphere))
+		return (false);
+	if (!(splitted[1] && parse_xyz(&(sphere->center->x), &(sphere->center->y),
+				&(sphere->center->z), splitted[1])))
 		return (printf(" error on Sphere line.\n"), false);
 	if (!(splitted[2] && parse_positive_nb(&(sphere->diameter),
 				splitted[2])))
 		return (printf(" error on Sphere line.\n"), false);
-	if (!(splitted[3] && parse_rgb(&(sphere->r), &(sphere->g),
-				&(sphere->b), splitted[3])))
+	if (!(splitted[3] && parse_rgb(&(sphere->rgb->r), &(sphere->rgb->g),
+				&(sphere->rgb->b), splitted[3])))
 		return (false);
 	if (splitted[4])
 		return (printf(" error on Sphere line: too many arguments.\n"), false);

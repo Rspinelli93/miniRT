@@ -44,5 +44,6 @@ int main(void)
 	//printf("his ratio is %f", data.ambient->light_ratio);
 	//printf("and the rgb values are : %d %d %d \n", data.ambient->r, data.ambient->g, data.ambient->b);
 	free_data(&data);
+	
 	return (0);
 }
