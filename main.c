@@ -37,13 +37,14 @@
 
 int main(void)
 {
-	t_data data;
+	t_data	data;
+
 	memset_t_data(&data);
-	parse(&data, "./hola.txt");
+	if (!parse(&data, "./hola.rt"))
+		return (printf("parse err"), 1);
 	//printf("We have an ambient light \n");
 	//printf("his ratio is %f", data.ambient->light_ratio);
 	//printf("and the rgb values are : %d %d %d \n", data.ambient->r, data.ambient->g, data.ambient->b);
 	free_data(&data);
-	
 	return (0);
 }

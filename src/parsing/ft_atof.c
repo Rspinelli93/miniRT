@@ -73,7 +73,7 @@ int	is_valid_float(const char *str)
 	{
 		if ((str[i] < '0' || str[i] > '9') && str[i] != '.')
 		{
-			ft_printf("char: %c\n", str[i]);
+			printf("char: %c\n", str[i]);
 			return (false);
 		}
 		i++;

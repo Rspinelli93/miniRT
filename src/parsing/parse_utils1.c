@@ -31,7 +31,8 @@ bool	parse_rgb(int *r, int *g, int *b, char *str)
 		i++;
 	}
 	if (i != 3 || splitted_rgb[i])
-		return (printf("%d", i),free_split(splitted_rgb), perror("Color code"), false);
+		return (printf("%d", i), free_split(splitted_rgb),
+			perror("Color code"), false);
 	free_split(splitted_rgb);
 	*r = rgb[0];
 	*g = rgb[1];
