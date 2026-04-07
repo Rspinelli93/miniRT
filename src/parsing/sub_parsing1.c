@@ -29,7 +29,7 @@ bool	parse_ambient_light(t_data *data, char **splitted)
 				&(data->ambient->b), splitted[2])))
 		return (printf(" error on Ambient Light line.\n"), false);
 	if (splitted[3])
-		return (printf(" error on Ambient Light line: too many arguments.\n"), false);
+		return (printf("Too many arguments error on Ambient Light line.\n"), false);
 	return (true);
 }
 
@@ -53,7 +53,7 @@ bool	parse_camera(t_data *data, char **splitted)
 	if (!(splitted[3] && parse_view_range(&(data->camera->fov), splitted[3])))
 		return (printf(" error on Camera line.\n"), false);
 	if (splitted[4])
-		return (printf(" error on Camera line: too many arguments.\n"), false);
+		return (printf("Too many arguments error on Camera line.\n"), false);
 	return (true);
 }
 
@@ -77,6 +77,6 @@ bool	parse_light(t_data *data, char **splitted)
 				&(data->light->b), splitted[3])))
 		return (printf(" error on Light line.\n"), false);
 	if (splitted[4])
-		return (printf("too many arguments error on Light line.\n"), false);
+		return (printf("Too many arguments error on Light line.\n"), false);
 	return (true);
 }

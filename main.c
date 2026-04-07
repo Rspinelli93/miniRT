@@ -35,11 +35,12 @@
 	return (0);
 } */
 
-int main(void)
+int main(int argc, char *argv[])
 {
 	t_data data;
+	(void)argc;
 	memset_t_data(&data);
-	parse(&data, "./hola.txt");
+	parse(&data, argv[1]);
 	//printf("We have an ambient light \n");
 	//printf("his ratio is %f", data.ambient->light_ratio);
 	//printf("and the rgb values are : %d %d %d \n", data.ambient->r, data.ambient->g, data.ambient->b);

@@ -6,7 +6,7 @@
 /*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 19:13:18 by rick              #+#    #+#             */
-/*   Updated: 2026/03/31 09:30:43 by glucken          ###   ########.fr       */
+/*   Updated: 2026/03/31 16:43:25 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,21 @@ bool	parse(t_data *data, char *doc)
 static bool	validate_tokens(t_data *data, char **tokens)
 {
 	if (!ft_strncmp("A", tokens[0], 2))
-		return (printf("ambiant light\n"), parse_ambient_light(data, tokens));
+		return (parse_ambient_light(data, tokens));
 	else if (!ft_strncmp("C", tokens[0], 2))
-		return (printf("camera\n"), parse_camera(data, tokens));
+		return (parse_camera(data, tokens));
 	else if (!ft_strncmp("L", tokens[0], 2))
-		return (printf("light\n"), parse_light(data, tokens));
+		return (parse_light(data, tokens));
 	else if (!ft_strncmp("sp", tokens[0], 3))
-		return (printf("sphere\n"), parse_sphere(data, tokens));
+		return (parse_sphere(data, tokens));
 	else if (!ft_strncmp("pl", tokens[0], 3))
-		return (printf("plane\n"), parse_plane(data, tokens));
+		return (parse_plane(data, tokens));
 	else if (!ft_strncmp("cy", tokens[0], 3))
-		return (printf("cylinder\n"), parse_cylinder(data, tokens));
+		return (parse_cylinder(data, tokens));
 	else if (!ft_strncmp("\n", tokens[0], 2))
 		return (true);
-	return (perror("Wrong data format"), false);
+	printf("First characteres of a line should be A, C, L, sp, pl or cy.\n");
+	return (false);
 }
 
 /*
@@ -83,7 +84,6 @@ char	**get_text(char *address)
 		arr[i] = get_next_line(fd);
 		if (!arr[i])
 			return (perror("GNL Err"), NULL);
-		printf("%s\n", arr[i]);
 		i++;
 	}
 	arr[i] = NULL;
