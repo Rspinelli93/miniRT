@@ -12,7 +12,7 @@ int	main()
 	if (!parse(&data, "./simple_test.rt"))
 		return (printf("parse err"), 1);
 	create_space(&data);
-	put_blue_screen(&data);
+	fill_viewport(&data);
 	mlx_put_image_to_window(data.mlx, data.win, data.img, 0, 0);
 	setup_hooks(&data);
 	mlx_loop(data.mlx);
