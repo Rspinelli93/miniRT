@@ -53,6 +53,8 @@ bool	is_touching_sphere(t_data *data, float vpx, float vpy)
 	return (disc >= 0);
 }
 
+/* 
+* Function to change the value of the color of the current pixel in data.*/
 int	send_vector(t_data *data, int x, int y)
 {
 	float	vpx;
@@ -71,6 +73,8 @@ int	send_vector(t_data *data, int x, int y)
 	return (color);
 }
 
+/*
+* Set up function to create our 3D space.*/
 void	create_space(t_data *data)
 {
 	t_vector	up;
@@ -83,13 +87,14 @@ void	create_space(t_data *data)
 	data->camera_space.x = vectoriel_product(data->camera_space.y, data->camera_space.z);
 }
 
+/*
+* Function to fill our canvas that then will be pushed to the Window.*/
 int	put_blue_screen(t_data *data)
 {
 	int	x;
 	int	y;
 	int	color;
 
-	create_space(data);
 	y = 0;
 	while (y < WIN_HEIGHT)
 	{
@@ -98,6 +103,7 @@ int	put_blue_screen(t_data *data)
 		{
 			color = send_vector(data, x, y);
 			my_mlx_put_pixel(data, x, y, color);
+			//set color and distance back to -1
 			x++;
 		}
 		y++;

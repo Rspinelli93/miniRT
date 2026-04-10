@@ -8,8 +8,10 @@ int	main()
 	memset_t_data(&data);
 	if (init_mlx(&data) != true)
 		return (false);
+	//* ADD TO PARSER EVEX TIME WE USE ATOF (IF THE NUMBER IS NOT EQUAL TO FTOA(ATOF("NUM")))
 	if (!parse(&data, "./simple_test.rt"))
 		return (printf("parse err"), 1);
+	create_space(&data);
 	put_blue_screen(&data);
 	mlx_put_image_to_window(data.mlx, data.win, data.img, 0, 0);
 	setup_hooks(&data);
