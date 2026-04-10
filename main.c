@@ -1,22 +1,24 @@
 # include "minirt.h"
 
 //* TEST FOR WINDOW CREATION
-/* int	main(int argc, char **argv)
+int	main()
 {
 	t_data	data;
 
-	if (validate_args(argc, argv) != true)
-		return (false);
 	memset_t_data(&data);
 	if (init_mlx(&data) != true)
 		return (false);
+	//* ADD TO PARSER EVEX TIME WE USE ATOF (IF THE NUMBER IS NOT EQUAL TO FTOA(ATOF("NUM")))
+	if (!parse(&data, "./simple_test.rt"))
+		return (printf("parse err"), 1);
+	create_space(&data);
 	put_blue_screen(&data);
 	mlx_put_image_to_window(data.mlx, data.win, data.img, 0, 0);
 	setup_hooks(&data);
 	mlx_loop(data.mlx);
 	return (true);
 }
- */
+
 
 // *TEST FOR GET_TEXT
 /* int	main(void)
@@ -35,15 +37,18 @@
 	return (0);
 } */
 
-int main(int argc, char *argv[])
+/*
+int main(void)
 {
-	t_data data;
-	(void)argc;
+	t_data	data;
+
 	memset_t_data(&data);
-	parse(&data, argv[1]);
+	if (!parse(&data, "./hola.rt"))
+		return (printf("parse err"), 1);
 	//printf("We have an ambient light \n");
 	//printf("his ratio is %f", data.ambient->light_ratio);
 	//printf("and the rgb values are : %d %d %d \n", data.ambient->r, data.ambient->g, data.ambient->b);
 	free_data(&data);
 	return (0);
 }
+*/

@@ -6,7 +6,7 @@
 /*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 19:13:18 by rick              #+#    #+#             */
-/*   Updated: 2026/03/31 16:43:25 by glucken          ###   ########.fr       */
+/*   Updated: 2026/04/10 17:52:39 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	get_size(char *adress);
 static bool	validate_tokens(t_data *data, char **tokens);
+static bool	check_valid_file_type(char *str);
 
 bool	parse(t_data *data, char *doc)
 {
@@ -23,6 +24,8 @@ bool	parse(t_data *data, char *doc)
 
 	i = 0;
 	tokens = NULL;
+	if (!check_valid_file_type(doc))
+		return (printf("Err: Wrong file type\n"), false);
 	lines = get_text(doc);
 	if (!lines)
 		return (false);
@@ -59,7 +62,7 @@ static bool	validate_tokens(t_data *data, char **tokens)
 }
 
 /*
-Function to save the text of the document in an array of strings.*/
+* Function to save the text of the document in an array of strings.*/
 char	**get_text(char *address)
 {
 	int		fd;
@@ -87,17 +90,17 @@ char	**get_text(char *address)
 		i++;
 	}
 	arr[i] = NULL;
-	close(fd);
-	return (arr);
+	trim_newlines(arr);
+	return (close(fd), arr);
 }
 
 /*
-Function to get the amount of lines in the document.
-Opens the documents and reads byte by byte checking
-for new lines incrementing the size value.
-If size is 0 at the end of read iteration the file is empty
-and the error is printed.
-Finally it closes the file and returns the value of size.*/
+* Function to get the amount of lines in the document.
+* Opens the documents and reads byte by byte checking
+* for new lines incrementing the size value.
+* If size is 0 at the end of read iteration the file is empty
+* and the error is printed.
+* Finally it closes the file and returns the value of size.*/
 static int	get_size(char *adress)
 {
 	int		fd;
@@ -112,7 +115,7 @@ static int	get_size(char *adress)
 		return (perror("Not valid doc address"), 0);
 	ret = read(fd, &c, 1);
 	if (ret <= 0)
-		return (perror("Wrong format doc."), 0) ;
+		return (perror("Wrong format doc."), 0);
 	while (ret > 0)
 	{
 		if (c == '\n')
@@ -121,4 +124,20 @@ static int	get_size(char *adress)
 	}
 	close(fd);
 	return (size);
+}
+
+/*
+* Function to check the format of the file.*/
+static bool	check_valid_file_type(char *str)
+{
+	int		len;
+	char	*temp;
+
+	len = (int)ft_strlen(str);
+	if (len < 4)
+		return (false);
+	temp = str + (len - 3);
+	if (ft_strncmp(temp, ".rt", 4) != 0)
+		return (false);
+	return (true);
 }
