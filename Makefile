@@ -14,6 +14,7 @@ SRCS        = main.c \
 			  src/parsing/ft_atof.c \
 			  src/utils/utils1.c \
 			  src/utils/utils2.c \
+			  src/utils/utils_maths1.c \
 			  src/free/free.c \
 			  src/free/free_utils.c \
 			  gnl/get_next_line.c \

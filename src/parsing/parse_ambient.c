@@ -15,7 +15,7 @@
 /*
 * Funtion to parse and set the values in the struct ambient light.
 * Returns true on success
-* Returns false on failure, in case of malloc fail or 
+* Returns false on failure, in case of malloc fail or
 * 		in case that another ambient light was created already
 *		during the parsing.*/
 bool	parse_ambient_light(t_data *data, char **splitted)
@@ -39,7 +39,7 @@ bool	parse_ambient_light(t_data *data, char **splitted)
 /*
 * Funtion to parse and set the values in the struct camera.
 * Returns true on success
-* Returns false on failure, in case of malloc fail or 
+* Returns false on failure, in case of malloc fail or
 * 		in case that another camera was created already
 *		during the parsing.*/
 bool	parse_camera(t_data *data, char **splitted)
@@ -57,6 +57,7 @@ bool	parse_camera(t_data *data, char **splitted)
 	if (!(splitted[3] && parse_view_range(&(data->camera->fov),
 				splitted[3])))
 		return (printf(" error on Camera line.\n"), false);
+	data->camera->fov = data->camera->fov * M_PI / 180.0f;
 	if (splitted[4])
 		return (printf(" error on Camera line: too many args.\n"), false);
 	return (true);
@@ -65,7 +66,7 @@ bool	parse_camera(t_data *data, char **splitted)
 /*
 * Funtion to parse and set the values in the struct light.
 * Returns true on success
-* Returns false on failure, in case of malloc fail or 
+* Returns false on failure, in case of malloc fail or
 * 		in case that another light was created already
 *		during the parsing.*/
 bool	parse_light(t_data *data, char **splitted)

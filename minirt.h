@@ -46,7 +46,7 @@ bool	parse_xyz(float *x, float *y, float *z, char *str);
 bool	parse_xyz_norm(float *x, float *y, float *z, char *str);
 bool	parse_ratio_light(float *ratio, char *str);
 bool	parse_positive_nb(float *nb, char *str);
-bool	parse_view_range(int *nb, char *str);
+bool	parse_view_range(float *nb, char *str);
 bool	parse_ambient_light(t_data *data, char **splitted);
 bool	parse_camera(t_data *data, char **splitted);
 bool	parse_light(t_data *data, char **splitted);
@@ -62,9 +62,13 @@ void	ft_safe_lstdelone(t_list *lst, void (*del)(void **));
 void	ft_safe_lstclear(t_list **lst, void (*del)(void **));
 
 //* ---------- UTILS ----------
-void	add_back_sphere(t_sphere **lst, t_sphere *new);
-void	add_back_plane(t_plane **lst, t_plane *new);
-void	add_back_cylinder(t_cylinder **lst, t_cylinder *new);
-void	trim_newlines(char **arr);
-
+void		add_back_sphere(t_sphere **lst, t_sphere *new);
+void		add_back_plane(t_plane **lst, t_plane *new);
+void		add_back_cylinder(t_cylinder **lst, t_cylinder *new);
+void		trim_newlines(char **arr);
+t_vector	vectoriel_product(t_vector a, t_vector b);
+float		scalar_product(t_vector a, t_vector b);
+float		norm_l2(t_vector a);
+float		angle(t_vector a, t_vector b);
+t_vector	normalized(t_vector	a);
 #endif

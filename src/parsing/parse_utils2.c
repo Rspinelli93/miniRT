@@ -42,12 +42,12 @@ bool	parse_positive_nb(float *nb, char *str)
 
 // they said we should keep 0 and 180 but
 // I'm not sure to agree with that
-bool	parse_view_range(int *nb, char *str)
+bool	parse_view_range(float *nb, char *str)
 {
-	int	tmp;
+	float	tmp;
 
 	tmp = ft_atof((const char *)str);
-	if (tmp < (int) 0 || tmp > 180)
+	if (tmp < 0 || tmp > 180)
 		return (perror("Wrong degree of vision\n"), false);
 	*nb = tmp;
 	return (true);

@@ -33,18 +33,71 @@ void	setup_hooks(t_data *data)
 	mlx_key_hook(data->win, key_event, data);
 }
 
+bool	is_touching_sphere(t_data *data, float vpx, float vpy)
+{
+	t_vector	dir;
+	t_vector	oc;
+	float		radius;
+	float		disc;
+
+	dir.x = vpx;
+	dir.y = vpy;
+	dir.z = 1;
+	dir = normalized(dir);
+	oc.x = data->camera->origin.x - data->sphere_list->center.x;
+	oc.y = data->camera->origin.y - data->sphere_list->center.y;
+	oc.z = data->camera->origin.z - data->sphere_list->center.z;
+	radius = data->sphere_list->diameter / 2.0f;
+	disc = pow(scalar_product(dir, oc), 2)
+		- (scalar_product(oc, oc) - radius * radius);
+	return (disc >= 0);
+}
+
+int	send_vector(t_data *data, int x, int y)
+{
+	float	vpx;
+	float	vpy;
+	float	h;
+	int		color;
+
+	h = tan(data->camera->fov / 2.0f);
+	vpx = (2.0f * ((float)x + 0.5f) / WIN_WIDTH - 1.0f)
+		* (float)WIN_WIDTH / (float)WIN_HEIGHT * h;
+	vpy = (1.0f - 2.0f * ((float)y + 0.5f) / WIN_HEIGHT) * h;
+	if (is_touching_sphere(data, vpx, vpy))
+		color = 0x0000FF;
+	else
+		color = 0xFFFFFF;
+	return (color);
+}
+
+void	create_space(t_data *data)
+{
+	t_vector	up;
+
+	up.x = 1;
+	up.y = 0;
+	up.z = 0;
+	data->camera_space.z = data->camera->vector;
+	data->camera_space.y = vectoriel_product(data->camera->vector, up);
+	data->camera_space.x = vectoriel_product(data->camera_space.y, data->camera_space.z);
+}
+
 int	put_blue_screen(t_data *data)
 {
 	int	x;
 	int	y;
+	int	color;
 
+	create_space(data);
 	y = 0;
 	while (y < WIN_HEIGHT)
 	{
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			my_mlx_put_pixel(data, x, y, 0x000000FF);
+			color = send_vector(data, x, y);
+			my_mlx_put_pixel(data, x, y, color);
 			x++;
 		}
 		y++;

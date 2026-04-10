@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 19:32:24 by rick              #+#    #+#             */
-/*   Updated: 2026/04/02 23:02:52 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/10 16:17:26 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	memset_t_data(t_data *data)
 	data->sphere_list = NULL;
 	data->plane_list = NULL;
 	data->cylinder_list = NULL;
+	data->color_pixel = -1;
+	data->distance = -1;
 }
 
 int	init_mlx(t_data *data)

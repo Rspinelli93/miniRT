@@ -9,8 +9,23 @@ typedef struct s_sphere			t_sphere;
 typedef struct s_plane			t_plane;
 typedef struct s_cylinder		t_cylinder;
 typedef struct s_vector			t_vector;
+typedef struct s_space			t_space;
 typedef struct s_point			t_point;
 typedef struct s_color			t_color;
+
+struct s_vector
+{
+	float	x;
+	float	y;
+	float	z;
+};
+
+struct s_space
+{
+	t_vector	x;
+	t_vector	y;
+	t_vector	z;
+};
 
 struct s_data
 {
@@ -27,13 +42,9 @@ struct s_data
 	t_sphere		*sphere_list;
 	t_plane			*plane_list;
 	t_cylinder		*cylinder_list;
-};
-
-struct s_vector
-{
-	float	x;
-	float	y;
-	float	z;
+	t_space			camera_space;
+	int				color_pixel;
+	float			distance; // NULL at -1
 };
 
 struct s_point
@@ -58,7 +69,7 @@ struct s_ambient_light
 
 struct s_camera
 {
-	int			fov;
+	float		fov;
 	t_point		origin;
 	t_vector	vector;
 };
