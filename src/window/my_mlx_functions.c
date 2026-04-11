@@ -32,23 +32,3 @@ void	setup_hooks(t_data *data)
 	mlx_hook(data->win, 17, 0, close_mlx, data);
 	mlx_key_hook(data->win, key_event, data);
 }
-
-bool	is_touching_sphere(t_data *data, float vpx, float vpy)
-{
-	t_vector	dir;
-	t_vector	oc;
-	float		radius;
-	float		disc;
-
-	dir.x = vpx * data->camera_space.x.x + vpy * data->camera_space.y.x + data->camera_space.z.x;
-	dir.y = vpx * data->camera_space.x.y + vpy * data->camera_space.y.y + data->camera_space.z.y;
-	dir.z = vpx * data->camera_space.x.z + vpy * data->camera_space.y.z + data->camera_space.z.z;
-	dir = normalized(dir);
-	oc.x = data->camera->origin.x - data->sphere_list->center.x;
-	oc.y = data->camera->origin.y - data->sphere_list->center.y;
-	oc.z = data->camera->origin.z - data->sphere_list->center.z;
-	radius = data->sphere_list->diameter / 2.0f;
-	disc = pow(scalar_product(dir, oc), 2)
-		- (scalar_product(oc, oc) - radius * radius);
-	return (disc >= 0);
-}

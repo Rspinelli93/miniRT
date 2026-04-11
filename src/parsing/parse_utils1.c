@@ -66,6 +66,8 @@ bool	parse_xyz(float *x, float *y, float *z, char *str)
 	return (true);
 }
 
+// ici en bas il faudrait verifier que 
+
 bool	parse_xyz_norm(float *x, float *y, float *z, char *str)
 {
 	char	**splitted_xyz;
@@ -82,11 +84,9 @@ bool	parse_xyz_norm(float *x, float *y, float *z, char *str)
 			return (free_split(splitted_xyz),
 				printf("Normalized xyz"), false);
 		xyz[i] = ft_atof(splitted_xyz[i]);
-		if (xyz[i] < 0 || xyz[i] > 1)
-			return (free_split(splitted_xyz), printf("Normalized xyz"), false);
 		i++;
 	}
-	if (splitted_xyz[i] || i < 3)
+	if (splitted_xyz[i] || i < 3 || sqrt(xyz[0] * xyz[0] + xyz[1] * xyz[1] + xyz[2] * xyz[2])!= 1)
 		return (free_split(splitted_xyz), printf("Normalized xyz"), false);
 	free_split(splitted_xyz);
 	*x = xyz[0];

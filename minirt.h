@@ -38,7 +38,10 @@ void		setup_hooks(t_data *data);
 
 //* --------- WINDOW ----------
 void		fill_viewport(t_data *data);
-void		set_color_pixel(t_data *data, int vpx, int vpy);
+void		set_color_pixel(t_data *data);
+float		distance_sphere(t_data *data, t_sphere	sphere);
+float		distance_plane(t_data *data, t_plane plane);
+float		distance_cylinder(t_data *data, t_cylinder cylinder);
 
 //* --------- PARSING ---------
 bool		parse(t_data *data, char *doc);

@@ -40,7 +40,7 @@ void	memset_t_data(t_data *data)
 	data->plane_list = NULL;
 	data->cylinder_list = NULL;
 	data->color_pixel = -1;
-	data->distance = -1;
+	data->distance = __FLT_MAX__;
 }
 
 int	init_mlx(t_data *data)

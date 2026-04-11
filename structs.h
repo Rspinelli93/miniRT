@@ -45,6 +45,7 @@ struct s_data
 	t_space			camera_space;
 	int				color_pixel;
 	float			distance;
+	t_vector		dir;
 };
 
 struct s_point
