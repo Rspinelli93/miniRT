@@ -28,6 +28,7 @@ bool	init_sphere(t_sphere *sphere);
 bool	init_plane(t_plane *plane);
 bool	init_cylinder(t_cylinder *cylinder);
 int		validate_args(int argc, char *argv[]);
+void	create_space(t_data *data);
 
 //* --------- MINILIBX ---------
 int		close_mlx(t_data *data);

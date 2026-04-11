@@ -40,9 +40,9 @@ bool	is_touching_sphere(t_data *data, float vpx, float vpy)
 	float		radius;
 	float		disc;
 
-	dir.x = vpx;
-	dir.y = vpy;
-	dir.z = 1;
+	dir.x = vpx * data->camera_space.x.x + vpy * data->camera_space.y.x + data->camera_space.z.x;
+	dir.y = vpx * data->camera_space.x.y + vpy * data->camera_space.y.y + data->camera_space.z.y;
+	dir.z = vpx * data->camera_space.x.z + vpy * data->camera_space.y.z + data->camera_space.z.z;
 	dir = normalized(dir);
 	oc.x = data->camera->origin.x - data->sphere_list->center.x;
 	oc.y = data->camera->origin.y - data->sphere_list->center.y;
@@ -53,7 +53,7 @@ bool	is_touching_sphere(t_data *data, float vpx, float vpy)
 	return (disc >= 0);
 }
 
-/* 
+/*
 * Function to change the value of the color of the current pixel in data.*/
 int	send_vector(t_data *data, int x, int y)
 {
