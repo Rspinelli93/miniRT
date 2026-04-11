@@ -44,7 +44,7 @@ struct s_data
 	t_cylinder		*cylinder_list;
 	t_space			camera_space;
 	int				color_pixel;
-	float			distance; // NULL at -1
+	float			distance;
 };
 
 struct s_point

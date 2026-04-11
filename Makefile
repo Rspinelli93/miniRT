@@ -6,6 +6,7 @@ SRCS        = main.c \
 			  src/init/init_data.c \
 			  src/init/init_ambient.c \
               src/window/my_mlx_functions.c \
+			  src/window/pixel_color.c \
               src/parsing/parse.c \
 			  src/parsing/parse_shapes.c \
 			  src/parsing/parse_ambient.c \

@@ -6,7 +6,7 @@
 /*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 19:18:55 by rick              #+#    #+#             */
-/*   Updated: 2026/04/02 23:51:37 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/10 18:58:48 by rick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,14 @@ void	trim_newlines(char **arr)
 			arr[i][len - 1] = '\0';
 		i++;
 	}
+}
+
+/*
+* Returns the value of a color in hexadecimal.*/
+int	get_hex_color(t_color *rgb)
+{
+	unsigned int	hex;
+
+	hex = (rgb->r << 16) | (rgb->g << 8) | rgb->b;
+	return ((int)hex);
 }

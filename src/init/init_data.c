@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 19:32:24 by rick              #+#    #+#             */
-/*   Updated: 2026/04/10 16:17:26 by glucken          ###   ########.fr       */
+/*   Updated: 2026/04/10 18:27:06 by rick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,18 @@ int	init_mlx(t_data *data)
 	if (!data->addr)
 		return (printf("GET ADDR FAIL\n"), false);
 	return (true);
+}
+
+/*
+* Set up function to create our 3D space.*/
+void	create_space(t_data *data)
+{
+	t_vector	up;
+
+	up.x = 1;
+	up.y = 0;
+	up.z = 0;
+	data->camera_space.z = data->camera->vector;
+	data->camera_space.y = vectoriel_product(data->camera->vector, up);
+	data->camera_space.x = vectoriel_product(data->camera_space.y, data->camera_space.z);
 }
