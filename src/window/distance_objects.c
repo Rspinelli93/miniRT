@@ -28,6 +28,7 @@ float	distance_sphere(t_data *data, t_sphere	sphere)
 		return (1);
 	return (-1);
 }
+// ici il faudrait encore renvoyer la distance et pas 1
 
 float	distance_plane(t_data *data, t_plane plane)
 {
@@ -47,8 +48,7 @@ float	distance_plane(t_data *data, t_plane plane)
 	return (-1);
 }
 
-static float	check_cylinder_cap(float sol[2], t_data *data,
-		t_cylinder cyl, t_vector oc)
+static float	check_cylinder_cap(float sol[2], t_data *data, t_cylinder cyl, t_vector oc)
 {
 	float	m;
 	int		i;

@@ -2,14 +2,15 @@ NAME        = minirt
 
 # --- Manual File Listing ---
 SRCS        = main.c \
-              src/init/initalisation.c \
+			  src/init/initalisation.c \
 			  src/init/init_data.c \
 			  src/init/init_ambient.c \
-              src/window/my_mlx_functions.c \
+			  src/window/my_mlx_functions.c \
 			  src/window/pixel_color.c \
 			  src/window/viewport.c \
 			  src/window/distance_objects.c \
-              src/parsing/parse.c \
+			  src/window/put_light.c \
+			  src/parsing/parse.c \
 			  src/parsing/parse_shapes.c \
 			  src/parsing/parse_ambient.c \
 			  src/parsing/parse_utils1.c \
