@@ -86,7 +86,7 @@ bool	parse_xyz_norm(float *x, float *y, float *z, char *str)
 		xyz[i] = ft_atof(splitted_xyz[i]);
 		i++;
 	}
-	if (splitted_xyz[i] || i < 3 || sqrt(xyz[0] * xyz[0] + xyz[1] * xyz[1] + xyz[2] * xyz[2])!= 1)
+	if (splitted_xyz[i] || i < 3)
 		return (free_split(splitted_xyz), printf("Normalized xyz"), false);
 	free_split(splitted_xyz);
 	*x = xyz[0];
