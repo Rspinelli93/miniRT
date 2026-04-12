@@ -6,7 +6,7 @@
 /*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 18:49:43 by rick              #+#    #+#             */
-/*   Updated: 2026/04/12 14:50:39 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/12 15:00:19 by rick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ static void	check_spheres(t_data *data, int *color, t_point src, t_vector dir)
 		if (curr_dist < data->distance && curr_dist > 0)
 		{
 			*color = get_hex_color(&(temp->rgb));
-			put_light_sphere(data, *temp, curr_dist, color);
+			if (check_coalition(data, curr_dist))
+				*color = color_to_shadow(*color);
+			else
+				put_light_sphere(data, *temp, curr_dist, color);
 			data->distance = curr_dist;
 		}
 		temp = temp->next;
@@ -78,7 +81,10 @@ static void	check_cylinders(t_data *data, int *color, t_point src, t_vector dir)
 		if (curr_dist < data->distance && curr_dist > 0)
 		{
 			*color = get_hex_color(&(temp->rgb));
-			put_light_cylinder(data, *temp, curr_dist, color);
+			if (check_coalition(data, curr_dist))
+				*color = color_to_shadow(*color);
+			else
+				put_light_cylinder(data, *temp, curr_dist, color);
 			data->distance = curr_dist;
 		}
 		temp = temp->next;
@@ -104,7 +110,10 @@ static void	check_planes(t_data *data, int *color, t_point src, t_vector dir)
 		if (curr_dist < data->distance && curr_dist > 0)
 		{
 			*color = get_hex_color(&(temp->rgb));
-			put_light_plane(data, *temp, curr_dist, color);
+			if (check_coalition(data, curr_dist))
+				*color = color_to_shadow(*color);
+			else
+				put_light_plane(data, *temp, curr_dist, color);
 			data->distance = curr_dist;
 		}
 		temp = temp->next;

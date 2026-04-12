@@ -6,11 +6,19 @@
 /*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 14:21:55 by rick              #+#    #+#             */
-/*   Updated: 2026/04/12 14:47:36 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/12 15:19:10 by rick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minirt.h"
+
+float	distace_between_two_points(t_point a, t_point b)
+{
+	t_vector	vector;
+
+	vector = vector_from_points(a, b);
+	return (norm_l2(vector));
+}
 
 /*
 * This function will iterate on the sphere list and check on the
@@ -29,7 +37,7 @@ static bool	spheres_shadow(t_data *data, t_point src, t_vector dir)
 	while (temp)
 	{
 		curr_dist = distance_sphere(*temp, src, dir);
-		if (curr_dist < 0)
+		if (curr_dist > 0 && curr_dist < distace_between_two_points(data->light->origin, src))
 			return (true);
 		temp = temp->next;
 	}
@@ -53,7 +61,7 @@ static bool	cylinders_shadow(t_data *data, t_point src, t_vector dir)
 	while (temp)
 	{
 		curr_dist = distance_cylinder(*temp, src, dir);
-		if (curr_dist < 0)
+		if (curr_dist > 0 && curr_dist < distace_between_two_points(data->light->origin, src))
 			return (true);
 		temp = temp->next;
 	}
@@ -77,14 +85,14 @@ static bool	planes_shadow(t_data *data, t_point src, t_vector dir)
 	while (temp)
 	{
 		curr_dist = distance_plane(*temp, src, dir);
-		if (curr_dist < 0)
+		if (curr_dist > 0 && curr_dist < distace_between_two_points(data->light->origin, src))
 			return (true);
 		temp = temp->next;
 	}
 	return (false);
 }
 
-bool	check_coaliton(t_data *data, float distance)
+bool	check_coalition(t_data *data, float distance)
 {
 	t_point		src;
 	t_vector	dir;
