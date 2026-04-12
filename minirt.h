@@ -40,6 +40,12 @@ void		set_color_pixel(t_data *data);
 float		distance_sphere(t_sphere sphere, t_point src, t_vector dir);
 float		distance_plane(t_plane plane, t_point src, t_vector dir);
 float		distance_cylinder(t_cylinder cylinder, t_point src, t_vector dir);
+float		distance_sphere(t_data *data, t_sphere	sphere);
+float		distance_plane(t_data *data, t_plane plane);
+float		distance_cylinder(t_data *data, t_cylinder cylinder);
+void		put_light_sphere(t_data *data, t_sphere sphere, float curr_dist, int *color);
+void		put_light_plane(t_data *data, t_plane plane, float curr_dist, int *color);
+void	put_light_cylinder(t_data *data, t_cylinder cyl, float curr_dist, int *color);
 
 //* --------- PARSING ---------
 bool		parse(t_data *data, char *doc);
@@ -72,9 +78,10 @@ void		trim_newlines(char **arr);
 t_vector	vectoriel_product(t_vector a, t_vector b);
 float		scalar_product(t_vector a, t_vector b);
 float		norm_l2(t_vector a);
-float		angle(t_vector a, t_vector b);
+float		angle_vect(t_vector a, t_vector b);
 t_vector	normalized(t_vector	a);
 bool		solve_quadratic(float a, float b, float c, float sol[2]);
+t_vector	vector_from_points(t_point a, t_point b);
 int			get_hex_color(t_color *rgb);
 int			color_to_shadow(int color);
 int			color_to_light(int color, float angle);

@@ -28,6 +28,7 @@ float	distance_sphere(t_sphere sphere, t_point src, t_vector dir)
 		return (1);
 	return (-1);
 }
+// ici il faudrait encore renvoyer la distance et pas 1
 
 float	distance_plane(t_plane plane, t_point src, t_vector dir)
 {

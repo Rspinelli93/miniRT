@@ -39,7 +39,7 @@ float	norm_l2(t_vector a)
 }
 
 // checker le cas ou on fait une division par 0
-float	angle(t_vector a, t_vector b)
+float	angle_vect(t_vector a, t_vector b)
 {
 	float result;
 
