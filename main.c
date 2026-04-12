@@ -9,7 +9,7 @@ int	main()
 	if (init_mlx(&data) != true)
 		return (false);
 	//* ADD TO PARSER EVEX TIME WE USE ATOF (IF THE NUMBER IS NOT EQUAL TO FTOA(ATOF("NUM")))
-	if (!parse(&data, "./pokeball.rt"))
+	if (!parse(&data, "./board.rt"))
 		return (printf("parse err"), 1);
 	create_space(&data);
 	fill_viewport(&data);
