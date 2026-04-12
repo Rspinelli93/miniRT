@@ -76,6 +76,7 @@ float		scalar_product(t_vector a, t_vector b);
 float		norm_l2(t_vector a);
 float		angle(t_vector a, t_vector b);
 t_vector	normalized(t_vector	a);
+bool		solve_quadratic(float a, float b, float c, float sol[2]);
 int			get_hex_color(t_color *rgb);
 
 #endif

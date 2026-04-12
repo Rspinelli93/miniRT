@@ -12,26 +12,22 @@
 
 #include "../../minirt.h"
 
-int	*solve_2_equation(int a, int b, int c)
+bool	solve_quadratic(float a, float b, float c, float sol[2])
 {
-	int sol[2];
-	int delta;
+	float	delta;
 
 	if (a == 0 && b == 0)
-		return (NULL);
+		return (false);
 	if (a == 0)
 	{
-		sol[0] = - c / b;
-		sol[1] = - c / b;
-		return (sol);
+		sol[0] = -c / b;
+		sol[1] = sol[0];
+		return (true);
 	}
 	delta = b * b - 4 * a * c;
 	if (delta < 0)
-		return (NULL);
-	else
-	{
-		sol[0] = (- b - sqrt(delta)) / (2 * a);
-		sol[1] = (- b + sqrt(delta)) / (2 * a);
-	}
-	return (sol);
+		return (false);
+	sol[0] = (-b - sqrtf(delta)) / (2 * a);
+	sol[1] = (-b + sqrtf(delta)) / (2 * a);
+	return (true);
 }

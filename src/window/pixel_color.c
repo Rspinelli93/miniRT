@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pixel_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 18:49:43 by rick              #+#    #+#             */
-/*   Updated: 2026/04/10 18:57:23 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/11 21:35:50 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ static void	check_planes(t_data *data, int *color)
 		{
 			*color = get_hex_color(&(temp->rgb));
 			data->distance = curr_dist;
-			printf("%f\n", curr_dist);
 		}
 		temp = temp->next;
 	}
