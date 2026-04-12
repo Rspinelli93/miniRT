@@ -17,6 +17,8 @@ float	distance_sphere(t_sphere sphere, t_point src, t_vector dir)
 	t_vector	oc;
 	float		radius;
 	float		delta;
+	float		t_plus;
+	float		t_minus;
 
 	oc.x = src.x - sphere.center.x;
 	oc.y = src.y - sphere.center.y;
@@ -25,10 +27,16 @@ float	distance_sphere(t_sphere sphere, t_point src, t_vector dir)
 	delta = pow(scalar_product(dir, oc), 2)
 		- (scalar_product(oc, oc) - radius * radius);
 	if (delta > 0)
-		return (1);
+	{
+		t_plus = (- 2 * (scalar_product(dir, oc) + sqrt(delta))) / ( 2 * scalar_product(dir, dir));
+		t_minus = (- 2 * (scalar_product(dir, oc) - sqrt(delta))) / ( 2 * scalar_product(dir, dir));
+		if (t_plus < t_minus)
+			return (t_plus);
+		else
+			return (t_minus);
+	}
 	return (-1);
 }
-// ici il faudrait encore renvoyer la distance et pas 1
 
 float	distance_plane(t_plane plane, t_point src, t_vector dir)
 {

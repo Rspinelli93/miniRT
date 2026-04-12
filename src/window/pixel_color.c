@@ -6,7 +6,7 @@
 /*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 18:49:43 by rick              #+#    #+#             */
-/*   Updated: 2026/04/12 14:40:30 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/12 14:50:39 by rick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ static void	check_spheres(t_data *data, int *color, t_point src, t_vector dir)
 		if (curr_dist < data->distance && curr_dist > 0)
 		{
 			*color = get_hex_color(&(temp->rgb));
-			if (check_coaliton(data, color, curr_dist))
-				*color = color_to_shadow(*color);
-			else
-				put_light_sphere(data, *temp, curr_dist, color);
+			put_light_sphere(data, *temp, curr_dist, color);
 			data->distance = curr_dist;
 		}
 		temp = temp->next;
