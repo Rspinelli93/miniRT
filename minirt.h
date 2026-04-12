@@ -1,6 +1,13 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
+# define PI 3.14159265358979323846
+# define WIN_WIDTH 800
+# define WIN_HEIGHT 600
+# define KEY_ESC 65307
+# define SUCCESS 1
+# define FAILURE 0
+
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
@@ -13,20 +20,11 @@
 # include "./gnl/get_next_line.h"
 # include "./minilibx_linux/mlx.h"
 
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 600
-# define KEY_ESC 65307
-# define SUCCESS 1
-# define FAILURE 0
-
 //* ---------- INIT ----------
 bool	init_light(t_data *data);
 void	memset_t_data(t_data *data);
 bool	init_ambient_light(t_data *data);
 bool	init_camera(t_data *data);
-bool	init_sphere(t_sphere *sphere);
-bool	init_plane(t_plane *plane);
-bool	init_cylinder(t_cylinder *cylinder);
 int		validate_args(int argc, char *argv[]);
 void	create_space(t_data *data);
 
@@ -39,9 +37,9 @@ void		setup_hooks(t_data *data);
 //* --------- WINDOW ----------
 void		fill_viewport(t_data *data);
 void		set_color_pixel(t_data *data);
-float		distance_sphere(t_data *data, t_sphere	sphere);
-float		distance_plane(t_data *data, t_plane plane);
-float		distance_cylinder(t_data *data, t_cylinder cylinder);
+float		distance_sphere(t_sphere sphere, t_point src, t_vector dir);
+float		distance_plane(t_plane plane, t_point src, t_vector dir);
+float		distance_cylinder(t_cylinder cylinder, t_point src, t_vector dir);
 
 //* --------- PARSING ---------
 bool		parse(t_data *data, char *doc);
@@ -78,5 +76,7 @@ float		angle(t_vector a, t_vector b);
 t_vector	normalized(t_vector	a);
 bool		solve_quadratic(float a, float b, float c, float sol[2]);
 int			get_hex_color(t_color *rgb);
+int			color_to_shadow(int color);
+int			color_to_light(int color, float angle);
 
 #endif

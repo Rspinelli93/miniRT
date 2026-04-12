@@ -6,7 +6,7 @@
 /*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 19:02:20 by rick              #+#    #+#             */
-/*   Updated: 2026/04/10 19:04:27 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/12 09:49:52 by rick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	 create_normalized_director(t_data *data, int x, int y)
 	data->dir.z = vpx * data->camera_space.x.z + vpy * data->camera_space.y.z + data->camera_space.z.z;
 	data->dir = normalized(data->dir);
 }
+
 /* 
 * Casts a ray and runs set_color_pixel to set the color of that current pixel
 * In the struct t_data.*/
