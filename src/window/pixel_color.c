@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pixel_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 18:49:43 by rick              #+#    #+#             */
-/*   Updated: 2026/04/12 13:19:26 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/12 13:46:54 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	check_spheres(t_data *data, int *color, t_point src, t_vector dir)
 		if (curr_dist < data->distance && curr_dist > 0)
 		{
 			*color = get_hex_color(&(temp->rgb));
-			*color = color_to_light(*color, 0);
+			put_light_sphere(data, *temp, curr_dist, color);
 			data->distance = curr_dist;
 		}
 		temp = temp->next;

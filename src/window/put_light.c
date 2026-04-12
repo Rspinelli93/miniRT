@@ -32,7 +32,7 @@ void	put_light_sphere(t_data *data, t_sphere sphere, float curr_dist, int *color
 	point = point_from_cartesien(data->camera->origin, curr_dist, data->dir);
 	normal = vector_from_points(sphere.center, point);
 	ray = vector_from_points(point, data->light->origin);
-	*color = 250 * angle_vect(normal, ray) + *color;
+	*color = color_to_light(*color, angle_vect(normal, ray));
 }
 
 void	put_light_plane(t_data *data, t_plane plane, float curr_dist, int *color)
@@ -44,7 +44,7 @@ void	put_light_plane(t_data *data, t_plane plane, float curr_dist, int *color)
 	point = point_from_cartesien(data->camera->origin, curr_dist, data->dir);
 	normal = plane.vector;
 	ray = vector_from_points(point, data->light->origin);
-	*color = 250 * angle_vect(normal, ray) + *color;
+	*color = color_to_light(*color, angle_vect(normal, ray));
 }
 
 void	put_light_cylinder(t_data *data, t_cylinder cyl, float curr_dist,
@@ -64,5 +64,5 @@ void	put_light_cylinder(t_data *data, t_cylinder cyl, float curr_dist,
 	normal.z = (point.z - cyl.center.z) - m * cyl.vector.z;
 	normal = normalized(normal);
 	ray = vector_from_points(point, data->light->origin);
-	*color = 250 * angle_vect(normal, ray) + *color;
+	*color = color_to_light(*color, angle_vect(normal, ray));
 }
