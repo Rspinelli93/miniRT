@@ -9,6 +9,7 @@ SRCS        = main.c \
 			  src/window/pixel_color.c \
 			  src/window/viewport.c \
 			  src/window/distance_objects.c \
+			  src/window/pixel_shadow.c \
 			  src/window/put_light.c \
 			  src/parsing/parse.c \
 			  src/parsing/parse_shapes.c \
