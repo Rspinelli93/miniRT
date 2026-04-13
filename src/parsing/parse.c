@@ -3,19 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 19:13:18 by rick              #+#    #+#             */
-/*   Updated: 2026/04/10 17:52:39 by glucken          ###   ########.fr       */
+/*   Updated: 2026/04/13 10:39:54 by rick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minirt.h"
 
-static int	get_size(char *adress);
-static bool	validate_tokens(t_data *data, char **tokens);
-static bool	check_valid_file_type(char *str);
+static bool		validate_tokens(t_data *data, char **tokens);
+static t_list	*read_file_to_list(int fd);
+static char		**get_text(char *address);
 
+/*
+* Parsing logic launcher. By reading the right file type, the function
+* checks the format and returns true or false acordingly.
+* The errors messages are all managed on Failure.*/
 bool	parse(t_data *data, char *doc)
 {
 	char	**lines;
@@ -25,10 +29,12 @@ bool	parse(t_data *data, char *doc)
 	i = 0;
 	tokens = NULL;
 	if (!check_valid_file_type(doc))
-		return (printf("Err: Wrong file type\n"), false);
+		return (printf("Error:\nWrong file type\n"), false);
 	lines = get_text(doc);
 	if (!lines)
 		return (false);
+	if (!check_ACL(lines))
+		return (free_split(lines), printf("Error:\nWrong amount of ACL\n"), false);
 	while (lines && lines[i])
 	{
 		tokens = ft_split(lines[i], ' ');
@@ -41,6 +47,9 @@ bool	parse(t_data *data, char *doc)
 	return (true);
 }
 
+/*
+* Helper to run each format checker according to token 
+* specificator the found in the document line.*/
 static bool	validate_tokens(t_data *data, char **tokens)
 {
 	if (!ft_strncmp("A", tokens[0], 2))
@@ -57,87 +66,70 @@ static bool	validate_tokens(t_data *data, char **tokens)
 		return (parse_cylinder(data, tokens));
 	else if (!ft_strncmp("\n", tokens[0], 2))
 		return (true);
-	printf("First characteres of a line should be A, C, L, sp, pl or cy.\n");
+	printf("Error\nLine should start with A, C, L, sp, pl or cy.\n");
 	return (false);
 }
 
 /*
-* Function to save the text of the document in an array of strings.*/
-char	**get_text(char *address)
+* Opens the file, reads it into a list, converts it to a 2D array,
+* and trims the newlines. Handles empty files naturally. */
+static char	**get_text(char *address)
 {
 	int		fd;
-	int		size;
+	t_list	*lst;
 	char	**arr;
-	int		i;
 
-	i = 0;
-	size = 0;
-	fd = 0;
-	size = get_size(address);
-	if (size == 0)
-		return (NULL);
-	arr = ft_calloc(sizeof(char *), size + 1);
-	if (!arr)
-		return (perror("Malloc"), NULL);
 	fd = open(address, O_RDONLY);
 	if (fd < 0)
-		return (perror("Not valid doc address"), NULL);
-	while (i < size - 1) // I put a minus 1 because I had an error but maybe we shouldn't
-	{
-		arr[i] = get_next_line(fd);
-		if (!arr[i])
-			return (perror("GNL Err"), NULL);
-		i++;
-	}
-	arr[i] = NULL;
-	trim_newlines(arr);
-	return (close(fd), arr);
-}
-
-/*
-* Function to get the amount of lines in the document.
-* Opens the documents and reads byte by byte checking
-* for new lines incrementing the size value.
-* If size is 0 at the end of read iteration the file is empty
-* and the error is printed.
-* Finally it closes the file and returns the value of size.*/
-static int	get_size(char *adress)
-{
-	int		fd;
-	char	c;
-	int		size;
-	int		ret;
-
-	size = 1;
-	c = '\0';
-	fd = open(adress, O_RDONLY);
-	if (fd < 0)
-		return (perror("Not valid doc address"), 0);
-	ret = read(fd, &c, 1);
-	if (ret <= 0)
-		return (perror("Wrong format doc."), 0);
-	while (ret > 0)
-	{
-		if (c == '\n')
-			size++;
-		ret = read(fd, &c, 1);
-	}
+		return (printf("Error:\nNot valid doc address\n"), NULL);
+	lst = read_file_to_list(fd);
 	close(fd);
-	return (size);
+	if (!lst)
+		return (printf("Error:\nEmpty or wrong format doc\n"), NULL);
+	arr = list_to_array(lst);
+	if (arr)
+		trim_newlines(arr);
+	return (arr);
 }
 
 /*
-* Function to check the format of the file.*/
-static bool	check_valid_file_type(char *str)
+* Reads the file line by line using GNL and stores 
+* each line in a linked list. */
+static t_list	*read_file_to_list(int fd)
 {
-	int		len;
-	char	*temp;
+	t_list	*lst;
+	char	*line;
 
-	len = (int)ft_strlen(str);
-	if (len < 4)
-		return (false);
-	temp = str + (len - 3);
-	if (ft_strncmp(temp, ".rt", 4) != 0)
-		return (false);
-	return (true);
+	lst = NULL;
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		ft_lstadd_back(&lst, ft_lstnew(line));
+	}
+	return (lst);
+}
+
+/*
+* Allocates the exact array size based on list length.
+* Then we copy the contetn of each node and then we free the list.*/
+static char	**list_to_array(t_list *lst)
+{
+	char	**arr;
+	int		i;
+	t_list	*tmp;
+
+	arr = ft_calloc(sizeof(char *), ft_lstsize(lst) + 1);
+	if (!arr)
+		return (ft_lstclear(&lst, free), printf("Error:\nMalloc\n"), NULL);
+	i = 0;
+	while (lst)
+	{
+		arr[i++] = (char *)lst->content;
+		tmp = lst->next;
+		free(lst);
+		lst = tmp;
+	}
+	return (arr);
 }

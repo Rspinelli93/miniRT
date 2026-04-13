@@ -46,7 +46,6 @@ void		put_light_cylinder(t_data *data, t_cylinder cyl, float curr_dist, int *col
 
 //* --------- PARSING ---------
 bool		parse(t_data *data, char *doc);
-char		**get_text(char *address);
 int			is_valid_float(const char *str);
 double		ft_atof(const char *str);
 bool		parse_rgb(int *r, int *g, int *b, char *str);
@@ -61,6 +60,8 @@ bool		parse_light(t_data *data, char **splitted);
 bool		parse_sphere(t_data *data, char **splitted);
 bool		parse_plane(t_data *data, char **splitted);
 bool		parse_cylinder(t_data *data, char **splitted);
+bool		check_ACL(char **arr);
+bool		check_valid_file_type(char *str);
 
 //* ---------- FREE ----------
 void		free_data(t_data *data);
@@ -79,10 +80,12 @@ float		angle_vect(t_vector a, t_vector b);
 t_vector	normalized(t_vector	a);
 bool		solve_quadratic(float a, float b, float c, float sol[2]);
 t_vector	vector_from_points(t_point a, t_point b);
+t_point		point_from_cartesien(t_point origin, float curr_dist, t_vector	dir);
+
+//* ---------- RAY ----------
 int			get_hex_color(t_color *rgb);
 int			color_to_shadow(int color);
 int			color_to_light(int color, float angle);
 bool		check_coalition(t_data *data, float distance);
-t_point		point_from_cartesien(t_point origin, float curr_dist, t_vector	dir);
 
 #endif

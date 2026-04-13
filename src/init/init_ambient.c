@@ -6,7 +6,7 @@
 /*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 19:32:43 by rick              #+#    #+#             */
-/*   Updated: 2026/04/02 22:32:06 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/13 09:13:45 by rick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool	init_camera(t_data *data)
 		return (false);
 	camera = (t_camera *)ft_calloc(sizeof(t_camera), 1);
 	if (!camera)
-		return (perror("Malloc fail\n"), false);
+		return (printf("Malloc fail\n"), false);
 	data->camera = camera;
 	return (true);
 }
@@ -43,7 +43,7 @@ bool	init_light(t_data *data)
 		return (false);
 	light = (t_light *)ft_calloc(sizeof(t_light), 1);
 	if (!light)
-		return (perror("Malloc fail\n"), false);
+		return (printf("Malloc fail\n"), false);
 	data->light = light;
 	return (true);
 }
@@ -61,7 +61,7 @@ bool	init_ambient_light(t_data *data)
 		return (false);
 	ambient = (t_ambient_light *)ft_calloc(sizeof(t_ambient_light), 1);
 	if (!ambient)
-		return (perror("Malloc Fail\n"), false);
+		return (printf("Malloc Fail\n"), false);
 	data->ambient = ambient;
 	return (true);
 }
