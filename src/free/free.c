@@ -6,7 +6,7 @@
 /*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:05:00 by rick              #+#    #+#             */
-/*   Updated: 2026/04/02 23:11:57 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/13 21:58:57 by rick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int	close_mlx(t_data *data)
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 	}
-	exit(true);
+	free_data(data);
+	exit(0);
 }
 
 /*

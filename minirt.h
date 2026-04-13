@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/13 20:38:33 by rick              #+#    #+#             */
+/*   Updated: 2026/04/13 20:38:33 by rick             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
 # define PI 3.14159265358979323846
-# define WIN_WIDTH 1200
-# define WIN_HEIGHT 900
+# define WIN_WIDTH 800
+# define WIN_HEIGHT 600
 # define KEY_ESC 65307
 # define SUCCESS 1
 # define FAILURE 0
@@ -29,7 +41,6 @@ int			validate_args(int argc, char *argv[]);
 void		create_space(t_data *data);
 
 //* --------- MINILIBX ---------
-int			close_mlx(t_data *data);
 void		my_mlx_put_pixel(t_data *data, int x, int y, int color);
 int			init_mlx(t_data *data);
 void		setup_hooks(t_data *data);
@@ -40,9 +51,12 @@ void		set_color_pixel(t_data *data);
 float		distance_sphere(t_sphere sphere, t_point src, t_vector dir);
 float		distance_plane(t_plane plane, t_point src, t_vector dir);
 float		distance_cylinder(t_cylinder cylinder, t_point src, t_vector dir);
-void		put_light_sphere(t_data *data, t_sphere sphere, float curr_dist, int *color);
-void		put_light_plane(t_data *data, t_plane plane, float curr_dist, int *color);
-void		put_light_cylinder(t_data *data, t_cylinder cyl, float curr_dist, int *color);
+void		put_light_sphere(t_data *data, t_sphere sphere,
+				float curr_dist, int *color);
+void		put_light_plane(t_data *data, t_plane plane,
+				float curr_dist, int *color);
+void		put_light_cylinder(t_data *data, t_cylinder cyl,
+				float curr_dist, int *color);
 
 //* --------- PARSING ---------
 bool		parse(t_data *data, char *doc);
@@ -68,6 +82,7 @@ bool		check_valid_file_type(char *str);
 void		free_data(t_data *data);
 void		free_and_null(void **ptr);
 void		free_split(char **arr);
+int			close_mlx(t_data *data);
 
 //* ---------- UTILS ----------
 void		add_back_sphere(t_sphere **lst, t_sphere *new);
@@ -81,7 +96,8 @@ float		angle_vect(t_vector a, t_vector b);
 t_vector	normalized(t_vector	a);
 bool		solve_quadratic(float a, float b, float c, float sol[2]);
 t_vector	vector_from_points(t_point a, t_point b);
-t_point		point_from_cartesien(t_point origin, float curr_dist, t_vector	dir);
+t_point		point_from_cartesien(t_point origin,
+				float curr_dist, t_vector	dir);
 
 //* ---------- RAY ----------
 int			get_hex_color(t_color *rgb);

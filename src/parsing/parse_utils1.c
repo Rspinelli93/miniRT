@@ -20,7 +20,7 @@ bool	parse_rgb(int *r, int *g, int *b, char *str)
 
 	splitted_rgb = ft_split(str, ',');
 	if (!splitted_rgb)
-		return (printf("Error:\nMalloc Fail\n"), false);
+		return (printf("Error\nMalloc Fail\n"), false);
 	i = 0;
 	while (splitted_rgb[i] && i < 3)
 	{
@@ -28,12 +28,12 @@ bool	parse_rgb(int *r, int *g, int *b, char *str)
 			&& ft_atoi(splitted_rgb[i]) <= 255)
 			rgb[i] = ft_atoi(splitted_rgb[i]);
 		else
-			return (free_split(splitted_rgb), printf(" Wrong color code\n"),
+			return (free_split(splitted_rgb), printf("Error\nWrong color code\n"),
 				false);
 		i++;
 	}
 	if (i != 3 || splitted_rgb[i])
-		return (free_split(splitted_rgb), printf(" Wrong color code\n"), false);
+		return (free_split(splitted_rgb), printf("Error\nWrong color code\n"), false);
 	free_split(splitted_rgb);
 	*r = rgb[0];
 	*g = rgb[1];
@@ -49,18 +49,18 @@ bool	parse_xyz(float *x, float *y, float *z, char *str)
 
 	splitted_xyz = ft_split(str, ',');
 	if (!splitted_xyz)
-		return (printf("Error:\nMalloc Fail\n"), false);
+		return (printf("Error\nMalloc Fail\n"), false);
 	i = 0;
 	while (splitted_xyz[i] && i < 3)
 	{
 		if (!is_valid_float(splitted_xyz[i]))
-			return (free_split(splitted_xyz), printf(" Wrong xyz\n"),
+			return (free_split(splitted_xyz), printf("Error\nWrong xyz\n"),
 				false);
 		xyz[i] = atof(splitted_xyz[i]);
 		i++;
 	}
 	if (splitted_xyz[i] || i < 3)
-		return (free_split(splitted_xyz), printf(" Wrong xyz\n"), false);
+		return (free_split(splitted_xyz), printf("Error\nWrong xyz\n"), false);
 	free_split(splitted_xyz);
 	*x = xyz[0];
 	*y = xyz[1];
@@ -86,19 +86,19 @@ bool	parse_xyz_norm(float *x, float *y, float *z, char *str)
 
 	splitted_xyz = ft_split(str, ',');
 	if (!splitted_xyz)
-		return (printf("Error:\nMalloc Fail\n"), false);
+		return (printf("Error\nMalloc Fail\n"), false);
 	i = 0;
 	while (splitted_xyz[i] && i < 3)
 	{
 		if (!is_valid_float(splitted_xyz[i]))
 			return (free_split(splitted_xyz),
-				printf(" Not normalized xyz\n"), false);
+				printf("Error\nNot normalized xyz\n"), false);
 		xyz[i] = ft_atof(splitted_xyz[i]);
 		i++;
 	}
 	if (splitted_xyz[i] || i < 3
 		|| xyz[0] * xyz[0] + xyz[1] * xyz[1] + xyz[2] * xyz[2] == 0)
-		return (free_split(splitted_xyz), printf(" Not normalized xyz\n"),
+		return (free_split(splitted_xyz), printf("Error\nNot normalized xyz\n"),
 			false);
 	free_split(splitted_xyz);
 	*x = xyz[0];

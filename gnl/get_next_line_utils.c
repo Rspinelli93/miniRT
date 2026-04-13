@@ -6,13 +6,13 @@
 /*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 11:33:50 by zalemu            #+#    #+#             */
-/*   Updated: 2026/03/27 20:47:18 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/13 20:38:08 by rick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen_gnl(const char *s)
+size_t	slen(const char *s)
 {
 	size_t	i;
 
@@ -43,7 +43,7 @@ char	*ft_strjoin_gnl(char *prev_line, char *buffer)
 
 	if (!prev_line && !*buffer)
 		return (NULL);
-	line = (char *) malloc(ft_strlen_gnl(prev_line) + ft_strlen_gnl(buffer) + 1);
+	line = (char *) malloc(slen(prev_line) + slen(buffer) + 1);
 	if (!line)
 	{
 		free(prev_line);

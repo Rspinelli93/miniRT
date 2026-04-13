@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
-MINIRT="$DIR/../minirt"
+MINIRT="$DIR/../miniRT"
 VALID_DIR="$DIR/valid"
 INVALID_DIR="$DIR/invalid"
 VALGRIND_LOG="$DIR/valgrind.log"

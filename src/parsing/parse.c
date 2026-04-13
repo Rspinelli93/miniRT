@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 19:13:18 by rick              #+#    #+#             */
-/*   Updated: 2026/04/13 19:22:45 by glucken          ###   ########.fr       */
+/*   Updated: 2026/04/13 21:19:14 by rick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ bool	parse(t_data *data, char *doc)
 	i = 0;
 	tokens = NULL;
 	if (!check_valid_file_type(doc))
-		return (printf("Error:\nWrong file type\n"), false);
+		return (printf("Error\nWrong file type\n"), false);
 	lines = get_text(doc);
 	if (!lines)
 		return (false);
 	if (!check_acl(lines))
-		return (free_split(lines), printf("Error:\nWrong amount of ACL\n"),
+		return (free_split(lines), printf("Error\nWrong amount of ACL\n"),
 			false);
 	while (lines && lines[i])
 	{
@@ -70,7 +70,7 @@ static bool	validate_tokens(t_data *data, char **tokens)
 		return (parse_cylinder(data, tokens));
 	else if (!ft_strncmp("\n", tokens[0], 2))
 		return (true);
-	printf("Error:\nLine should start with A, C, L, sp, pl or cy.\n");
+	printf("Error\nLine should start with A, C, L, sp, pl or cy.\n");
 	return (false);
 }
 
@@ -85,11 +85,11 @@ static char	**get_text(char *address)
 
 	fd = open(address, O_RDONLY);
 	if (fd < 0)
-		return (printf("Error:\nNot valid doc address\n"), NULL);
+		return (printf("Error\nNot valid doc address\n"), NULL);
 	lst = read_file_to_list(fd);
 	close(fd);
 	if (!lst)
-		return (printf("Error:\nEmpty or wrong format doc\n"), NULL);
+		return (printf("Error\nEmpty or wrong format doc\n"), NULL);
 	arr = list_to_array(lst);
 	if (arr)
 		trim_newlines(arr);
@@ -111,7 +111,10 @@ static t_list	*read_file_to_list(int fd)
 		if (!line)
 			break ;
 		if (line[0] == '\n' || line[0] == '#')
+		{
+			free(line);
 			continue ;
+		}
 		ft_lstadd_back(&lst, ft_lstnew(line));
 	}
 	return (lst);
@@ -128,7 +131,7 @@ static char	**list_to_array(t_list *lst)
 
 	arr = ft_calloc(sizeof(char *), ft_lstsize(lst) + 1);
 	if (!arr)
-		return (ft_lstclear(&lst, free), printf("Error:\nMalloc\n"), NULL);
+		return (ft_lstclear(&lst, free), printf("Error\nMalloc\n"), NULL);
 	i = 0;
 	while (lst)
 	{
