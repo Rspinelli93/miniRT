@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pixel_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 18:49:43 by rick              #+#    #+#             */
-/*   Updated: 2026/04/12 15:00:19 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/13 14:11:56 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	check_spheres(t_data *data, int *color, t_point src, t_vector dir)
 		{
 			*color = get_hex_color(&(temp->rgb));
 			if (check_coalition(data, curr_dist))
-				*color = color_to_shadow(*color);
+				*color = color_to_shadow(data, *color);
 			else
 				put_light_sphere(data, *temp, curr_dist, color);
 			data->distance = curr_dist;
@@ -82,7 +82,7 @@ static void	check_cylinders(t_data *data, int *color, t_point src, t_vector dir)
 		{
 			*color = get_hex_color(&(temp->rgb));
 			if (check_coalition(data, curr_dist))
-				*color = color_to_shadow(*color);
+				*color = color_to_shadow(data, *color);
 			else
 				put_light_cylinder(data, *temp, curr_dist, color);
 			data->distance = curr_dist;
@@ -111,7 +111,7 @@ static void	check_planes(t_data *data, int *color, t_point src, t_vector dir)
 		{
 			*color = get_hex_color(&(temp->rgb));
 			if (check_coalition(data, curr_dist))
-				*color = color_to_shadow(*color);
+				*color = color_to_shadow(data, *color);
 			else
 				put_light_plane(data, *temp, curr_dist, color);
 			data->distance = curr_dist;
