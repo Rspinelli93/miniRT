@@ -1,3 +1,5 @@
 minirt
 *.o
 *.a
+tests/invalid
+tests/valid

@@ -6,7 +6,7 @@
 /*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 19:13:18 by rick              #+#    #+#             */
-/*   Updated: 2026/04/13 10:39:54 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/13 14:24:35 by rick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static bool		validate_tokens(t_data *data, char **tokens);
 static t_list	*read_file_to_list(int fd);
 static char		**get_text(char *address);
+static char		**list_to_array(t_list *lst);
 
 /*
 * Parsing logic launcher. By reading the right file type, the function

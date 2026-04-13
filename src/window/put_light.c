@@ -12,7 +12,6 @@
 
 #include "../../minirt.h"
 
-
 t_point	point_from_cartesien(t_point origin, float curr_dist, t_vector	dir)
 {
 	t_point	point;

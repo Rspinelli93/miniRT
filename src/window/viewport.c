@@ -6,7 +6,7 @@
 /*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 19:02:20 by rick              #+#    #+#             */
-/*   Updated: 2026/04/12 09:49:52 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/13 14:46:11 by rick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,21 @@ void	fill_viewport(t_data *data)
 	}
 }
 
-void	 create_normalized_director(t_data *data, int x, int y)
+void	create_normalized_director(t_data *data, int x, int y)
 {
-	float		vpx;
-	float		vpy;
-	float		h;
+	float	vpx;
+	float	vpy;
+	float	h;
+	t_space	space;
 
+	space = data->camera_space;
 	h = tan(data->camera->fov / 2.0f);
 	vpx = (2.0f * ((float)x + 0.5f) / WIN_WIDTH - 1.0f)
 		* (float)WIN_WIDTH / (float)WIN_HEIGHT * h;
 	vpy = (1.0f - 2.0f * ((float)y + 0.5f) / WIN_HEIGHT) * h;
-	data->dir.x = vpx * data->camera_space.x.x + vpy * data->camera_space.y.x + data->camera_space.z.x;
-	data->dir.y = vpx * data->camera_space.x.y + vpy * data->camera_space.y.y + data->camera_space.z.y;
-	data->dir.z = vpx * data->camera_space.x.z + vpy * data->camera_space.y.z + data->camera_space.z.z;
+	data->dir.x = vpx * space.x.x + vpy * space.y.x + space.z.x;
+	data->dir.y = vpx * space.x.y + vpy * space.y.y + space.z.y;
+	data->dir.z = vpx * space.x.z + vpy * space.y.z + space.z.z;
 	data->dir = normalized(data->dir);
 }
 
