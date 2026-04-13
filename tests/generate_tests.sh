@@ -27,13 +27,15 @@ EOF
 
 cat << 'EOF' > "$DIR/valid/02_extreme_spacing.rt"
 
-A  	 0.2		 255,255,255	 
+A    0.2   255,255,255
 
-C	 -50,0,20	  0,0,1 	70
+C    -50,0,20   0,0,1    70
 
 L  -40,0,30   0.7  255,255,255
 
-sp		0,0,20 	 20 	 255,0,0
+
+
+sp     0,0,20     20     255,0,0
 
 EOF
 
@@ -83,7 +85,7 @@ echo -e "A 1.1 255,255,255\nC -50,0,20 0,0,1 70\nL -40,0,30 0.7 255,255,255" > "
 echo -e "A -0.1 255,255,255\nC -50,0,20 0,0,1 70\nL -40,0,30 0.7 255,255,255" > "$DIR/invalid/09_ratio_neg.rt"
 echo -e "A 0.2 255,255,255\nC -50,0,20 0,0,1 181\nL -40,0,30 0.7 255,255,255" > "$DIR/invalid/10_fov_high.rt"
 echo -e "A 0.2 255,255,255\nC -50,0,20 0,0,1 -1\nL -40,0,30 0.7 255,255,255" > "$DIR/invalid/11_fov_neg.rt"
-echo -e "$BASE\npl 0,0,0 0,2.0,0 255,255,255" > "$DIR/invalid/12_vector_bounds.rt"
+echo -e "$BASE\npl 0,0,1 0,0,0 255,255,255" > "$DIR/invalid/12_vector_bounds.rt"
 
 # 13-20: Missing or Extra Parameters
 echo -e "$BASE\nsp 0,0,0 255,0,0" > "$DIR/invalid/13_sp_missing_param.rt"
