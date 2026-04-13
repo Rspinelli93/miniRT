@@ -61,7 +61,7 @@ bool		parse_light(t_data *data, char **splitted);
 bool		parse_sphere(t_data *data, char **splitted);
 bool		parse_plane(t_data *data, char **splitted);
 bool		parse_cylinder(t_data *data, char **splitted);
-bool		check_ACL(char **arr);
+bool		check_acl(char **arr);
 bool		check_valid_file_type(char *str);
 
 //* ---------- FREE ----------
