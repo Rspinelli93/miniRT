@@ -52,8 +52,9 @@ bool	parse_positive_nb(float *nb, char *str)
 		if (tmp < (float) 0)
 			return (printf("Error:\nWrong Dimension\n"), false);
 		*nb = tmp;
+		return (true);
 	}
-	return (true);
+	return (false);
 }
 
 // they said we should keep 0 and 180 but

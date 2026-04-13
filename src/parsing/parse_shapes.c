@@ -32,7 +32,7 @@ bool	parse_sphere(t_data *data, char **splitted)
 		return (printf("Error:\nWrong Sphere line.\n"), false);
 	if (!(splitted[3] && parse_rgb(&(sphere->rgb.r), &(sphere->rgb.g),
 				&(sphere->rgb.b), splitted[3])))
-		return (false);
+		return (printf("Error:\nWrong Sphere line.\n"), false);
 	if (splitted[4])
 		return (printf("Error:\nSphere: too many args.\n"), false);
 	add_back_sphere(&(data->sphere_list), sphere);

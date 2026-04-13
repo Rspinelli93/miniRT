@@ -47,6 +47,7 @@ void		put_light_cylinder(t_data *data, t_cylinder cyl, float curr_dist, int *col
 //* --------- PARSING ---------
 bool		parse(t_data *data, char *doc);
 int			is_valid_float(const char *str);
+bool		is_valid_int(const char *str);
 double		ft_atof(const char *str);
 bool		parse_rgb(int *r, int *g, int *b, char *str);
 bool		parse_xyz(float *x, float *y, float *z, char *str);

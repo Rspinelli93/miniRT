@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 19:13:18 by rick              #+#    #+#             */
-/*   Updated: 2026/04/13 15:45:25 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/13 16:24:37 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ bool	parse(t_data *data, char *doc)
 }
 
 /*
-* Helper to run each format checker according to token 
+* Helper to run each format checker according to token
 * specificator the found in the document line.*/
 static bool	validate_tokens(t_data *data, char **tokens)
 {
@@ -94,7 +94,7 @@ static char	**get_text(char *address)
 }
 
 /*
-* Reads the file line by line using GNL and stores 
+* Reads the file line by line using GNL and stores
 * each line in a linked list. */
 static t_list	*read_file_to_list(int fd)
 {

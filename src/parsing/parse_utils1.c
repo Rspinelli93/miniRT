@@ -24,7 +24,7 @@ bool	parse_rgb(int *r, int *g, int *b, char *str)
 	i = 0;
 	while (splitted_rgb[i] && i < 3)
 	{
-		if (ft_atoi(splitted_rgb[i]) >= 0 && ft_atoi(splitted_rgb[i]) <= 255)
+		if (is_valid_int(splitted_rgb[i]) && ft_atoi(splitted_rgb[i]) >= 0 && ft_atoi(splitted_rgb[i]) <= 255)
 			rgb[i] = ft_atoi(splitted_rgb[i]);
 		else
 			return (free_split(splitted_rgb), printf("Error:\nWrong color code\n"), false);
@@ -65,7 +65,15 @@ bool	parse_xyz(float *x, float *y, float *z, char *str)
 	return (true);
 }
 
-// ici en bas il faudrait verifier que 
+static void	normalise_xyz(float *x, float *y, float *z)
+{
+	float	len;
+
+	len = sqrt(*x * *x + *y * *y + *z * *z);
+	*x = *x / len;
+	*y = *y / len;
+	*z = *z / len;
+}
 
 bool	parse_xyz_norm(float *x, float *y, float *z, char *str)
 {
@@ -85,11 +93,11 @@ bool	parse_xyz_norm(float *x, float *y, float *z, char *str)
 		xyz[i] = ft_atof(splitted_xyz[i]);
 		i++;
 	}
-	if (splitted_xyz[i] || i < 3)
+	if (splitted_xyz[i] || i < 3 || xyz[0] * xyz[0] + xyz[1] * xyz[1] + xyz[2] * xyz[2] == 0)
 		return (free_split(splitted_xyz), printf("Error:\nNot normalized xyz\n"), false);
 	free_split(splitted_xyz);
 	*x = xyz[0];
 	*y = xyz[1];
 	*z = xyz[2];
-	return (true);
+	return (normalise_xyz(x, y, z), true);
 }
