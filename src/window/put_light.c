@@ -30,6 +30,11 @@ void	put_light_sphere(t_data *data, t_sphere sphere, float curr_dist, int *color
 
 	point = point_from_cartesien(data->camera->origin, curr_dist, data->dir);
 	normal = vector_from_points(sphere.center, point);
+	if (scalar_product(data->dir, normal) > 0)
+	{
+		*color = color_to_shadow(data, *color);
+		return ;
+	}
 	ray = vector_from_points(point, data->light->origin);
 	*color = color_to_light(data, *color, angle_vect(normal, ray));
 }

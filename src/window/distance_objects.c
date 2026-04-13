@@ -25,15 +25,18 @@ float	distance_sphere(t_sphere sphere, t_point src, t_vector dir)
 	oc.z = src.z - sphere.center.z;
 	radius = sphere.diameter / 2.0f;
 	delta = pow(scalar_product(dir, oc), 2)
-		- (scalar_product(oc, oc) - radius * radius);
+		- scalar_product(dir, dir)
+		* (scalar_product(oc, oc) - radius * radius);
 	if (delta > 0)
 	{
-		t_plus = (- 2 * (scalar_product(dir, oc) + sqrt(delta))) / ( 2 * scalar_product(dir, dir));
-		t_minus = (- 2 * (scalar_product(dir, oc) - sqrt(delta))) / ( 2 * scalar_product(dir, dir));
-		if (t_plus < t_minus)
-			return (t_plus);
-		else
+		t_minus = (-scalar_product(dir, oc) - sqrt(delta))
+			/ scalar_product(dir, dir);
+		t_plus = (-scalar_product(dir, oc) + sqrt(delta))
+			/ scalar_product(dir, dir);
+		if (t_minus > 0)
 			return (t_minus);
+		if (t_plus > 0)
+			return (t_plus);
 	}
 	return (-1);
 }
