@@ -6,7 +6,7 @@
 /*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 19:13:18 by rick              #+#    #+#             */
-/*   Updated: 2026/04/13 14:24:35 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/13 15:45:25 by rick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static bool	validate_tokens(t_data *data, char **tokens)
 		return (parse_cylinder(data, tokens));
 	else if (!ft_strncmp("\n", tokens[0], 2))
 		return (true);
-	printf("Error\nLine should start with A, C, L, sp, pl or cy.\n");
+	printf("Error:\nLine should start with A, C, L, sp, pl or cy.\n");
 	return (false);
 }
 
@@ -107,6 +107,8 @@ static t_list	*read_file_to_list(int fd)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
+ 		if (line[0] == '\n' || line[0] == '#')
+			continue ;
 		ft_lstadd_back(&lst, ft_lstnew(line));
 	}
 	return (lst);

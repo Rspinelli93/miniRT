@@ -36,7 +36,7 @@ bool	parse_ratio_light(float *ratio, char *str)
 	{
 		tmp = ft_atof((const char *)str);
 		if (tmp < (float) 0 || tmp > (float) 1)
-			return (printf("Error:\nWrong Ratio"), false);
+			return (printf("Error:\nWrong Ratio\n"), false);
 		*ratio = tmp;
 	}
 	return (true);
@@ -50,7 +50,7 @@ bool	parse_positive_nb(float *nb, char *str)
 	{
 		tmp = ft_atof((const char *)str);
 		if (tmp < (float) 0)
-			return (printf("Error:\nWrong Dimension"), false);
+			return (printf("Error:\nWrong Dimension\n"), false);
 		*nb = tmp;
 	}
 	return (true);

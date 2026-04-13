@@ -71,19 +71,15 @@ int	is_valid_float(const char *str)
 		i++;
 	while (str[i])
 	{
-		if ((str[i] < '0' || str[i] > '9') && str[i] != '.')
-		{
-			printf("char: %c\n", str[i]);
-			return (false);
-		}
+		if (str[i] == '.')
+			has_dot++;
+		else if (str[i] < '0' || str[i] > '9')
+			return (0);
 		i++;
 	}
-	i = 0;
-	while (str[i++] == '.')
-		has_dot += 1;
 	if (has_dot > 1)
 		return (0);
-	return (true);
+	return (1);
 }
 
 double	ft_atof(const char *str)

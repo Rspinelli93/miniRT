@@ -3,3 +3,4 @@ minirt
 *.a
 tests/invalid
 tests/valid
+obj/
