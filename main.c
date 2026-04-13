@@ -31,7 +31,7 @@ int	main(int ac, char **av)
 		return (printf("Error:\nWrong number of args"), 1);
 	memset_t_data(&data);
 	if (!parse(&data, av[2]))
-		return (1);
-	return (0);
+		return (free_data(&data), 1);
+	return (free_data(&data), 0);
 }
 
