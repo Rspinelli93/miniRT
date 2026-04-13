@@ -27,8 +27,15 @@ static int	key_event(int keycode, t_data *data)
 	return (0);
 }
 
+static int	expose_event(t_data *data)
+{
+	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	return (0);
+}
+
 void	setup_hooks(t_data *data)
 {
 	mlx_hook(data->win, 17, 0, close_mlx, data);
 	mlx_key_hook(data->win, key_event, data);
+	mlx_expose_hook(data->win, expose_event, data);
 }
