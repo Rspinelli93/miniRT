@@ -4,9 +4,11 @@ DIR="$(cd "$(dirname "$0")" && pwd)"
 MINIRT="$DIR/../minirt"
 VALID_DIR="$DIR/valid"
 INVALID_DIR="$DIR/invalid"
+VALGRIND_LOG="$DIR/valgrind.log"
 
 GREEN='\033[0;32m'
 RED='\033[0;31m'
+YELLOW='\033[0;33m'
 NC='\033[0m'
 
 if [ ! -f "$MINIRT" ]; then
@@ -26,24 +28,52 @@ echo "======================================"
 echo -e "\nTesting VALID files (Expected exit code 0):"
 for file in "$VALID_DIR"/*.rt; do
     [ -e "$file" ] || break
-    $MINIRT -t "$file" > /dev/null 2>&1
+    
+    # Run with Valgrind quietly. Normal output is captured, memory errors go to log file.
+    output=$(valgrind --leak-check=full --quiet --log-file="$VALGRIND_LOG" "$MINIRT" -t "$file" 2>&1)
     status=$?
-    if [ $status -eq 0 ]; then
-        echo -e "${GREEN}[OK]${NC}   $(basename "$file")"
+    
+    # If the log file has a size greater than 0, Valgrind found a leak
+    if [ -s "$VALGRIND_LOG" ]; then
+        has_leak=1
     else
-        echo -e "${RED}[FAIL]${NC} $(basename "$file") (Exited with $status)"
+        has_leak=0
+    fi
+    rm -f "$VALGRIND_LOG"
+
+    if [ $status -eq 0 ]; then
+        if [ $has_leak -eq 1 ]; then
+            echo -e "${YELLOW}[OK (LEAK)]${NC} $(basename "$file")"
+        else
+            echo -e "${GREEN}[OK]${NC}        $(basename "$file")"
+        fi
+    else
+        echo -e "${RED}[FAIL]${NC}      $(basename "$file") (Exited with $status)"
     fi
 done
 
 echo -e "\nTesting INVALID files (Expected 'Error' output & exit code != 0):"
 for file in "$INVALID_DIR"/*.rt; do
     [ -e "$file" ] || break
-    output=$($MINIRT -t "$file" 2>&1)
+    
+    output=$(valgrind --leak-check=full --quiet --log-file="$VALGRIND_LOG" "$MINIRT" -t "$file" 2>&1)
     status=$?
-    if [ $status -ne 0 ] && [[ "$output" == Error* ]]; then
-        echo -e "${GREEN}[OK]${NC}   $(basename "$file")"
+    
+    if [ -s "$VALGRIND_LOG" ]; then
+        has_leak=1
     else
-        echo -e "${RED}[FAIL]${NC} $(basename "$file")"
+        has_leak=0
+    fi
+    rm -f "$VALGRIND_LOG"
+
+    if [ $status -ne 0 ] && [[ "$output" == Error* ]]; then
+        if [ $has_leak -eq 1 ]; then
+            echo -e "${YELLOW}[OK (LEAK)]${NC} $(basename "$file")"
+        else
+            echo -e "${GREEN}[OK]${NC}        $(basename "$file")"
+        fi
+    else
+        echo -e "${RED}[FAIL]${NC}      $(basename "$file")"
         echo "       Exit status: $status (Expected != 0)"
     fi
 done
