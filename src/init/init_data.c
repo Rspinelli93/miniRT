@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 19:32:24 by rick              #+#    #+#             */
-/*   Updated: 2026/04/10 18:27:06 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/13 18:44:52 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ void	create_space(t_data *data)
 	up.z = 0;
 	data->camera_space.z = data->camera->vector;
 	data->camera_space.y = vectoriel_product(data->camera->vector, up);
-	data->camera_space.x = vectoriel_product(data->camera_space.y, data->camera_space.z);
+	data->camera_space.x = vectoriel_product(data->camera_space.y,
+			data->camera_space.z);
 }

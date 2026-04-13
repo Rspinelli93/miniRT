@@ -20,6 +20,7 @@ int	main(int ac, char **av)
 	return (0);
 }
 
+/*
 
 // Main for running parse tests.
 /* int	main(int ac, char **av)

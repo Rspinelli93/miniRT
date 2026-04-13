@@ -6,7 +6,7 @@
 /*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 18:49:43 by rick              #+#    #+#             */
-/*   Updated: 2026/04/13 14:11:56 by glucken          ###   ########.fr       */
+/*   Updated: 2026/04/13 19:00:41 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 static void	check_planes(t_data *data, int *color, t_point src, t_vector dir);
 static void	check_spheres(t_data *data, int *color, t_point src, t_vector dir);
-static void	check_cylinders(t_data *data, int *color, t_point src, t_vector dir);
+static void	check_cylinders(t_data *data, int *color,
+				t_point src, t_vector dir);
 
 /*
 * Function to change the value of the color of the current pixel in data.
 * We initialize the color to the background color and we check if the ray
 * Collides with any type of object.
-* In that case we compare the distances and we change the value of color accordingly.
+* In that case we compare the distances and we change the value
+* of color accordingly.
 */
 void	set_color_pixel(t_data *data)
 {

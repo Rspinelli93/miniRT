@@ -34,11 +34,10 @@ bool	solve_quadratic(float a, float b, float c, float sol[2])
 
 t_vector	vector_from_points(t_point a, t_point b)
 {
-	t_vector result;
+	t_vector	result;
 
 	result.x = b.x - a.x;
 	result.y = b.y - a.y;
 	result.z = b.z - a.z;
-
 	return (result);
 }

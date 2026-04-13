@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   viewport.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 19:02:20 by rick              #+#    #+#             */
-/*   Updated: 2026/04/13 14:46:11 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/13 17:29:35 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	create_normalized_director(t_data *data, int x, int y)
 	data->dir = normalized(data->dir);
 }
 
-/* 
+/*
 * Casts a ray and runs set_color_pixel to set the color of that current pixel
 * In the struct t_data.*/
 static void	send_vector(t_data *data, int x, int y)

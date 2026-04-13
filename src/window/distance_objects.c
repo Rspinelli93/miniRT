@@ -25,23 +25,26 @@ float	distance_sphere(t_sphere sphere, t_point src, t_vector dir)
 	oc.z = src.z - sphere.center.z;
 	radius = sphere.diameter / 2.0f;
 	delta = pow(scalar_product(dir, oc), 2)
-		- (scalar_product(oc, oc) - radius * radius);
+		- scalar_product(dir, dir)
+		* (scalar_product(oc, oc) - radius * radius);
 	if (delta > 0)
 	{
-		t_plus = (- 2 * (scalar_product(dir, oc) + sqrt(delta))) / ( 2 * scalar_product(dir, dir));
-		t_minus = (- 2 * (scalar_product(dir, oc) - sqrt(delta))) / ( 2 * scalar_product(dir, dir));
-		if (t_plus < t_minus)
-			return (t_plus);
-		else
+		t_minus = (-scalar_product(dir, oc) - sqrt(delta))
+			/ scalar_product(dir, dir);
+		t_plus = (-scalar_product(dir, oc) + sqrt(delta))
+			/ scalar_product(dir, dir);
+		if (t_minus > 0)
 			return (t_minus);
+		if (t_plus > 0)
+			return (t_plus);
 	}
 	return (-1);
 }
 
 float	distance_plane(t_plane plane, t_point src, t_vector dir)
 {
-	float	denom;
-	float	t;
+	float		denom;
+	float		t;
 	t_vector	oc;
 
 	denom = scalar_product(plane.vector, dir);
@@ -103,4 +106,3 @@ float	distance_cylinder(t_cylinder cylinder, t_point src, t_vector dir)
 		return (-1);
 	return (check_cylinder_cap(sol, dir, cylinder, oc));
 }
-

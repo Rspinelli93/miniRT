@@ -32,7 +32,7 @@ float	scalar_product(t_vector a, t_vector b)
 
 float	norm_l2(t_vector a)
 {
-	float result;
+	float	result;
 
 	result = sqrt(scalar_product(a, a));
 	return (result);
@@ -41,9 +41,9 @@ float	norm_l2(t_vector a)
 // checker le cas ou on fait une division par 0
 float	angle_vect(t_vector a, t_vector b)
 {
-	float result;
+	float	result;
 
-	result = acos(scalar_product(a, b)/(norm_l2(a) * norm_l2(b)));
+	result = acos(scalar_product(a, b) / (norm_l2(a) * norm_l2(b)));
 	return (result);
 }
 
@@ -67,4 +67,3 @@ t_vector	normalized(t_vector a)
 	}
 	return (result);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pixel_shadow.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 14:21:55 by rick              #+#    #+#             */
-/*   Updated: 2026/04/13 14:43:08 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/13 19:01:27 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static bool	spheres_shadow(t_data *data, t_point src, t_vector dir)
 	while (temp)
 	{
 		curr_dist = distance_sphere(*temp, src, dir);
-		if (curr_dist > 0.001 && curr_dist < distance_ab(data->light->origin, src))
+		if (curr_dist > 0.001 && curr_dist
+			< distance_ab(data->light->origin, src))
 			return (true);
 		temp = temp->next;
 	}
@@ -61,7 +62,8 @@ static bool	cylinders_shadow(t_data *data, t_point src, t_vector dir)
 	while (temp)
 	{
 		curr_dist = distance_cylinder(*temp, src, dir);
-		if (curr_dist > 0.001 && curr_dist < distance_ab(data->light->origin, src))
+		if (curr_dist > 0.001 && curr_dist
+			< distance_ab(data->light->origin, src))
 			return (true);
 		temp = temp->next;
 	}
@@ -85,7 +87,8 @@ static bool	planes_shadow(t_data *data, t_point src, t_vector dir)
 	while (temp)
 	{
 		curr_dist = distance_plane(*temp, src, dir);
-		if (curr_dist > 0.001 && curr_dist < distance_ab(data->light->origin, src))
+		if (curr_dist > 0.001 && curr_dist
+			< distance_ab(data->light->origin, src))
 			return (true);
 		temp = temp->next;
 	}

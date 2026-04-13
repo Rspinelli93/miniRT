@@ -2,8 +2,8 @@
 # define MINIRT_H
 
 # define PI 3.14159265358979323846
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 600
+# define WIN_WIDTH 1200
+# define WIN_HEIGHT 900
 # define KEY_ESC 65307
 # define SUCCESS 1
 # define FAILURE 0
@@ -61,7 +61,7 @@ bool		parse_light(t_data *data, char **splitted);
 bool		parse_sphere(t_data *data, char **splitted);
 bool		parse_plane(t_data *data, char **splitted);
 bool		parse_cylinder(t_data *data, char **splitted);
-bool		check_ACL(char **arr);
+bool		check_acl(char **arr);
 bool		check_valid_file_type(char *str);
 
 //* ---------- FREE ----------
