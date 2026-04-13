@@ -6,7 +6,7 @@
 /*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 14:21:55 by rick              #+#    #+#             */
-/*   Updated: 2026/04/12 15:19:10 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/12 15:39:29 by rick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static bool	spheres_shadow(t_data *data, t_point src, t_vector dir)
 	while (temp)
 	{
 		curr_dist = distance_sphere(*temp, src, dir);
-		if (curr_dist > 0 && curr_dist < distace_between_two_points(data->light->origin, src))
+		if (curr_dist > 0.001 && curr_dist < distace_between_two_points(data->light->origin, src))
 			return (true);
 		temp = temp->next;
 	}
@@ -61,7 +61,7 @@ static bool	cylinders_shadow(t_data *data, t_point src, t_vector dir)
 	while (temp)
 	{
 		curr_dist = distance_cylinder(*temp, src, dir);
-		if (curr_dist > 0 && curr_dist < distace_between_two_points(data->light->origin, src))
+		if (curr_dist > 0.001 && curr_dist < distace_between_two_points(data->light->origin, src))
 			return (true);
 		temp = temp->next;
 	}
@@ -85,7 +85,7 @@ static bool	planes_shadow(t_data *data, t_point src, t_vector dir)
 	while (temp)
 	{
 		curr_dist = distance_plane(*temp, src, dir);
-		if (curr_dist > 0 && curr_dist < distace_between_two_points(data->light->origin, src))
+		if (curr_dist > 0.001 && curr_dist < distace_between_two_points(data->light->origin, src))
 			return (true);
 		temp = temp->next;
 	}
@@ -99,9 +99,10 @@ bool	check_coalition(t_data *data, float distance)
 
 	src = point_from_cartesien(data->camera->origin, distance, data->dir);
 	dir = vector_from_points(src, data->light->origin);
+	dir = normalized(dir);
 	if (planes_shadow(data, src, dir)
-		&& cylinders_shadow(data, src, dir)
-		&& spheres_shadow(data, src, dir))
+		|| cylinders_shadow(data, src, dir)
+		|| spheres_shadow(data, src, dir))
 		return (true);
 	return (false);
 }
