@@ -36,7 +36,7 @@ bool	parse_ratio_light(float *ratio, char *str)
 	{
 		tmp = ft_atof((const char *)str);
 		if (tmp < (float) 0 || tmp > (float) 1)
-			return (printf("Error:\nWrong Ratio\n"), false);
+			return (printf(" Wrong Ratio\n"), false);
 		*ratio = tmp;
 	}
 	return (true);
@@ -50,7 +50,7 @@ bool	parse_positive_nb(float *nb, char *str)
 	{
 		tmp = ft_atof((const char *)str);
 		if (tmp < (float) 0)
-			return (printf("Error:\nWrong Dimension\n"), false);
+			return (printf(" Wrong Dimension\n"), false);
 		*nb = tmp;
 		return (true);
 	}
@@ -65,7 +65,23 @@ bool	parse_view_range(float *nb, char *str)
 
 	tmp = ft_atof((const char *)str);
 	if (tmp < 0 || tmp > 180)
-		return (printf("Error:\nWrong degree of vision\n"), false);
+		return (printf(" Wrong degree of vision\n"), false);
 	*nb = tmp;
 	return (true);
+}
+
+bool	is_valid_int(const char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
 }

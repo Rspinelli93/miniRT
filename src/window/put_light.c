@@ -22,7 +22,8 @@ t_point	point_from_cartesien(t_point origin, float curr_dist, t_vector	dir)
 	return (point);
 }
 
-void	put_light_sphere(t_data *data, t_sphere sphere, float curr_dist, int *color)
+void	put_light_sphere(t_data *data, t_sphere sphere,
+			float curr_dist, int *color)
 {
 	t_vector	normal;
 	t_vector	ray;
@@ -39,7 +40,8 @@ void	put_light_sphere(t_data *data, t_sphere sphere, float curr_dist, int *color
 	*color = color_to_light(data, *color, angle_vect(normal, ray));
 }
 
-void	put_light_plane(t_data *data, t_plane plane, float curr_dist, int *color)
+void	put_light_plane(t_data *data, t_plane plane,
+			float curr_dist, int *color)
 {
 	t_vector	normal;
 	t_vector	ray;

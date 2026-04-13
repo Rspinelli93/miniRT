@@ -15,12 +15,12 @@
 /*
 * Returns true if the array contains one camera, one ambient
 * ligth and one light.*/
-bool	check_ACL(char **arr)
+bool	check_acl(char **arr)
 {
 	int	i;
 	int	a;
-	int c;
-	int l;
+	int	c;
+	int	l;
 
 	i = 0;
 	a = 0;

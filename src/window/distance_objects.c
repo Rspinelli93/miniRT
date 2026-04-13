@@ -43,8 +43,8 @@ float	distance_sphere(t_sphere sphere, t_point src, t_vector dir)
 
 float	distance_plane(t_plane plane, t_point src, t_vector dir)
 {
-	float	denom;
-	float	t;
+	float		denom;
+	float		t;
 	t_vector	oc;
 
 	denom = scalar_product(plane.vector, dir);
@@ -106,4 +106,3 @@ float	distance_cylinder(t_cylinder cylinder, t_point src, t_vector dir)
 		return (-1);
 	return (check_cylinder_cap(sol, dir, cylinder, oc));
 }
-

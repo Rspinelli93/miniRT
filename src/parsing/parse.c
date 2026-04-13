@@ -6,7 +6,7 @@
 /*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 19:13:18 by rick              #+#    #+#             */
-/*   Updated: 2026/04/13 16:52:52 by glucken          ###   ########.fr       */
+/*   Updated: 2026/04/13 18:49:19 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ bool	parse(t_data *data, char *doc)
 	lines = get_text(doc);
 	if (!lines)
 		return (false);
-	if (!check_ACL(lines))
-		return (free_split(lines), printf("Error:\nWrong amount of ACL\n"), false);
+	if (!check_acl(lines))
+		return (free_split(lines), printf("Error:\nWrong amount of ACL\n"),
+			false);
 	while (lines && lines[i])
 	{
 		tokens = ft_split(lines[i], ' ');
@@ -109,7 +110,7 @@ static t_list	*read_file_to_list(int fd)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
- 		if (line[0] == '\n' || line[0] == '#')
+		if (line[0] == '\n' || line[0] == '#')
 			continue ;
 		ft_lstadd_back(&lst, ft_lstnew(line));
 	}
