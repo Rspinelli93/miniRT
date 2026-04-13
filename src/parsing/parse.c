@@ -6,7 +6,7 @@
 /*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 19:13:18 by rick              #+#    #+#             */
-/*   Updated: 2026/04/13 15:45:25 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/13 16:33:45 by rick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ bool	parse(t_data *data, char *doc)
 * specificator the found in the document line.*/
 static bool	validate_tokens(t_data *data, char **tokens)
 {
+	if (*tokens == NULL)
+		return (true);
 	if (!ft_strncmp("A", tokens[0], 2))
 		return (parse_ambient_light(data, tokens));
 	else if (!ft_strncmp("C", tokens[0], 2))
