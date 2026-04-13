@@ -84,8 +84,8 @@ t_point		point_from_cartesien(t_point origin, float curr_dist, t_vector	dir);
 
 //* ---------- RAY ----------
 int			get_hex_color(t_color *rgb);
-int			color_to_shadow(int color);
-int			color_to_light(int color, float angle);
+int			color_to_shadow(t_data *data, int color);
+int			color_to_light(t_data *data, int color, float angle);
 bool		check_coalition(t_data *data, float distance);
 
 #endif

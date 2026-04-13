@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 19:18:55 by rick              #+#    #+#             */
-/*   Updated: 2026/04/12 13:10:26 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/13 14:33:06 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ int	get_hex_color(t_color *rgb)
 	return ((int)hex);
 }
 
-int	color_to_shadow(int color)
+int	color_to_shadow(t_data *data, int color)
 {
 	t_color	new;
 
-	new.r = ((color >> 16) & 0xFF) * 0.3;
-	new.g = ((color >> 8) & 0xFF) * 0.3;
-	new.b = (color & 0xFF) * 0.3;
+	new.r = (float)((color >> 16) & 0xFF) * data->ambient->light_ratio * data->ambient->rgb.r / 255;
+	new.g = (float)((color >> 8) & 0xFF) * data->ambient->light_ratio * data->ambient->rgb.g / 255;
+	new.b = (float)(color & 0xFF) * data->ambient->light_ratio * data->ambient->rgb.b / 255;
 	if (new.r > 255)
 		new.r = 255;
 	if (new.g > 255)
@@ -86,17 +86,17 @@ int	color_to_shadow(int color)
 	return (get_hex_color(&new));
 }
 
-int	color_to_light(int color, float angle)
+int	color_to_light(t_data *data, int color, float angle)
 {
 	t_color	new;
 	float	deg;
 
 	if (angle > (PI/2))
-		return (color_to_shadow(color));
-	deg = (1.3 - (2 * fabsf(angle) / PI));
-	new.r = ((color >> 16) & 0xFF) * deg;
-	new.g = ((color >> 8) & 0xFF) * deg;
-	new.b = (color & 0xFF) * deg;
+		return (color_to_shadow(data, color));
+	deg = cos(fabsf(angle));
+	new.r = ((color >> 16) & 0xFF) * (data->ambient->light_ratio * data->ambient->rgb.r / 255 + deg);
+	new.g = ((color >> 8) & 0xFF) * (data->ambient->light_ratio * data->ambient->rgb.g / 255 + deg);
+	new.b = (color & 0xFF) * (data->ambient->light_ratio * data->ambient->rgb.b / 255 + deg);;
 	if (new.r > 255)
 		new.r = 255;
 	if (new.g > 255)
