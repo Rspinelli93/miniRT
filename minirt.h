@@ -58,7 +58,7 @@ void		put_light_plane(t_data *data, t_plane plane,
 void		put_light_cylinder(t_data *data, t_cylinder cyl,
 				float curr_dist, int *color);
 
-//* --------- PARSING ---------
+//* -------- PARSING --------
 bool		parse(t_data *data, char *doc);
 int			is_valid_float(const char *str);
 bool		is_valid_int(const char *str);
