@@ -1,4 +1,4 @@
-NAME        = minirt
+NAME        = miniRT
 
 # --- Manual File Listing ---
 SRCS        = main.c \

@@ -1,4 +1,4 @@
-minirt
+miniRT
 *.o
 *.a
 tests/invalid

@@ -1,6 +1,6 @@
 # include "minirt.h"
 
-/*
+
 int	main(int ac, char **av)
 {
 	t_data	data;
@@ -19,11 +19,10 @@ int	main(int ac, char **av)
 	mlx_loop(data.mlx);
 	return (0);
 }
-	*/
 
 
 // Main for running parse tests.
-int	main(int ac, char **av)
+/* int	main(int ac, char **av)
 {
 	t_data	data;
 
@@ -33,5 +32,5 @@ int	main(int ac, char **av)
 	if (!parse(&data, av[2]))
 		return (free_data(&data), 1);
 	return (free_data(&data), 0);
-}
+} */
 
