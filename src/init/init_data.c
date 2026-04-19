@@ -6,7 +6,7 @@
 /*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 19:32:24 by rick              #+#    #+#             */
-/*   Updated: 2026/04/13 18:44:52 by glucken          ###   ########.fr       */
+/*   Updated: 2026/04/19 19:16:24 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,20 @@ int	init_mlx(t_data *data)
 void	create_space(t_data *data)
 {
 	t_vector	up;
+	t_vector	forward;
 
-	up.x = 1;
-	up.y = 0;
+	forward = normalized(data->camera->vector);
+	up.x = 0;
+	up.y = 1;
 	up.z = 0;
-	data->camera_space.z = data->camera->vector;
-	data->camera_space.y = vectoriel_product(data->camera->vector, up);
-	data->camera_space.x = vectoriel_product(data->camera_space.y,
-			data->camera_space.z);
+	if (fabsf(scalar_product(forward, up)) > 0.999f)
+	{
+		up.x = 0;
+		up.y = 0;
+		up.z = 1;
+	}
+	data->camera_space.z = forward;
+	data->camera_space.y = normalized(vectoriel_product(forward, up));
+	data->camera_space.x = normalized(vectoriel_product(data->camera_space.y,
+			data->camera_space.z));
 }
