@@ -6,7 +6,7 @@
 /*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 19:32:24 by rick              #+#    #+#             */
-/*   Updated: 2026/04/19 19:16:24 by glucken          ###   ########.fr       */
+/*   Updated: 2026/04/19 21:02:50 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	create_space(t_data *data)
 		up.z = 1;
 	}
 	data->camera_space.z = forward;
-	data->camera_space.y = normalized(vectoriel_product(forward, up));
-	data->camera_space.x = normalized(vectoriel_product(data->camera_space.y,
-			data->camera_space.z));
+	data->camera_space.x = normalized(vectoriel_product(forward, up));
+	data->camera_space.y = normalized(vectoriel_product(data->camera_space.x,
+				data->camera_space.z));
 }
