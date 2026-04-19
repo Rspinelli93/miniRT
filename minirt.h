@@ -37,7 +37,6 @@ bool		init_light(t_data *data);
 void		memset_t_data(t_data *data);
 bool		init_ambient_light(t_data *data);
 bool		init_camera(t_data *data);
-int			validate_args(int argc, char *argv[]);
 void		create_space(t_data *data);
 
 //* --------- MINILIBX ---------
@@ -77,6 +76,7 @@ bool		parse_plane(t_data *data, char **splitted);
 bool		parse_cylinder(t_data *data, char **splitted);
 bool		check_acl(char **arr);
 bool		check_valid_file_type(char *str);
+void		print_error(int err_num);
 
 //* ---------- FREE ----------
 void		free_data(t_data *data);
@@ -98,6 +98,7 @@ bool		solve_quadratic(float a, float b, float c, float sol[2]);
 t_vector	vector_from_points(t_point a, t_point b);
 t_point		point_from_cartesien(t_point origin,
 				float curr_dist, t_vector	dir);
+void		set_err_num(t_data *data, int num);
 
 //* ---------- RAY ----------
 int			get_hex_color(t_color *rgb);

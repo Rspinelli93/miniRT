@@ -6,7 +6,7 @@
 /*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 20:38:39 by rick              #+#    #+#             */
-/*   Updated: 2026/04/13 20:38:40 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/19 22:05:19 by rick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@ typedef struct s_vector			t_vector;
 typedef struct s_space			t_space;
 typedef struct s_point			t_point;
 typedef struct s_color			t_color;
+
+typedef enum e_err
+{
+	ERR_NONE,
+	ERR_MALLOC,
+	ERR_INVALID_ID,
+	ERR_DUPLICATE,
+	ERR_AMBIENT,
+	ERR_CAMERA,
+	ERR_LIGHT,
+	ERR_SPHERE,
+	ERR_PLANE,
+	ERR_CYLINDER
+}	t_err;
 
 struct s_vector
 {
@@ -45,6 +59,7 @@ struct s_data
 	void			*win;
 	void			*img;
 	char			*addr;
+	int				err_num;
 	int				bits_per_pixel;
 	int				line_length;
 	int				endian;

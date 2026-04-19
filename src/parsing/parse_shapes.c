@@ -23,18 +23,18 @@ bool	parse_sphere(t_data *data, char **splitted)
 
 	sphere = (t_sphere *)ft_calloc(sizeof(t_sphere), 1);
 	if (!sphere)
-		return (printf("Error\nMalloc Fail\n"), false);
+		return (set_err_num(data, ERR_MALLOC), false);
 	if (!(splitted[1] && parse_xyz(&(sphere->center.x), &(sphere->center.y),
 				&(sphere->center.z), splitted[1])))
-		return (free(sphere), printf("Error\nWrong Sphere line.\n"), false);
+		return (free(sphere), set_err_num(data, ERR_SPHERE), false);
 	if (!(splitted[2] && parse_positive_nb(&(sphere->diameter),
 				splitted[2])))
-		return (free(sphere), printf("Error\nWrong Sphere line.\n"), false);
+		return (free(sphere), set_err_num(data, ERR_SPHERE), false);
 	if (!(splitted[3] && parse_rgb(&(sphere->rgb.r), &(sphere->rgb.g),
 				&(sphere->rgb.b), splitted[3])))
-		return (free(sphere), printf("Error\nWrong Sphere line.\n"), false);
+		return (free(sphere), set_err_num(data, ERR_SPHERE), false);
 	if (splitted[4])
-		return (free(sphere), printf("Error\nSphere: too many args.\n"), false);
+		return (free(sphere), set_err_num(data, ERR_SPHERE), false);
 	add_back_sphere(&(data->sphere_list), sphere);
 	return (true);
 }
@@ -50,18 +50,18 @@ bool	parse_plane(t_data *data, char **splitted)
 
 	plane = (t_plane *)ft_calloc(sizeof(t_plane), 1);
 	if (!plane)
-		return (printf("Error\nMalloc Fail\n"), false);
+		return (set_err_num(data, ERR_MALLOC), false);
 	if (!(splitted[1] && parse_xyz(&(plane->center.x), &(plane->center.y),
 				&(plane->center.z), splitted[1])))
-		return (free(plane), printf("Error\nWrong Plane line.\n"), false);
+		return (free(plane), set_err_num(data, ERR_PLANE), false);
 	if (!(splitted[2] && parse_xyz_norm(&(plane->vector.x), &(plane->vector.y),
 				&(plane->vector.z), splitted[2])))
-		return (free(plane), printf("Error\nWrong Plane line.\n"), false);
+		return (free(plane), set_err_num(data, ERR_PLANE), false);
 	if (!(splitted[3] && parse_rgb(&(plane->rgb.r), &(plane->rgb.g),
 				&(plane->rgb.b), splitted[3])))
-		return (free(plane), printf("Error\nWrong Plane line.\n"), false);
+		return (free(plane), set_err_num(data, ERR_PLANE), false);
 	if (splitted[4])
-		return (free(plane), printf("Error\nPlane: too many args.\n"), false);
+		return (free(plane), set_err_num(data, ERR_PLANE), false);
 	add_back_plane(&(data->plane_list), plane);
 	return (true);
 }
@@ -73,26 +73,26 @@ bool	parse_plane(t_data *data, char **splitted)
 * Returns false on failure, in case of malloc fail.*/
 bool	parse_cylinder(t_data *data, char **splitted)
 {
-	t_cylinder	*cy;
+	t_cylinder	*cylinder;
 
-	cy = (t_cylinder *)ft_calloc(sizeof(t_cylinder), 1);
-	if (!cy)
-		return (printf("Error\nMalloc Fail\n"), false);
-	if (!(splitted[1] && parse_xyz(&(cy->center.x), &(cy->center.y),
-				&(cy->center.z), splitted[1])))
-		return (free(cy), printf("Error\nWrong Cylinder line.\n"), false);
-	if (!(splitted[2] && parse_xyz_norm(&(cy->vector.x),
-				&(cy->vector.y), &(cy->vector.z), splitted[2])))
-		return (free(cy), printf("Error\nWrong Cylinder line.\n"), false);
-	if (!(splitted[3] && parse_positive_nb(&(cy->diameter), splitted[3])))
-		return (free(cy), printf("Error\nWrong Cylinder line.\n"), false);
-	if (!(splitted[4] && parse_positive_nb(&(cy->height), splitted[4])))
-		return (free(cy), printf("Error\nWrong Cylinder line.\n"), false);
-	if (!(splitted[5] && parse_rgb(&(cy->rgb.r), &(cy->rgb.g),
-				&(cy->rgb.b), splitted[5])))
-		return (free(cy), printf("Error\nWrong Cylinder line.\n"), false);
+	cylinder = (t_cylinder *)ft_calloc(sizeof(t_cylinder), 1);
+	if (!cylinder)
+		return (set_err_num(data, ERR_MALLOC), false);
+	if (!(splitted[1] && parse_xyz(&(cylinder->center.x), &(cylinder->center.y),
+				&(cylinder->center.z), splitted[1])))
+		return (free(cylinder), set_err_num(data, ERR_CYLINDER), false);
+	if (!(splitted[2] && parse_xyz_norm(&(cylinder->vector.x),
+				&(cylinder->vector.y), &(cylinder->vector.z), splitted[2])))
+		return (free(cylinder), set_err_num(data, ERR_CYLINDER), false);
+	if (!(splitted[3] && parse_positive_nb(&(cylinder->diameter), splitted[3])))
+		return (free(cylinder), set_err_num(data, ERR_CYLINDER), false);
+	if (!(splitted[4] && parse_positive_nb(&(cylinder->height), splitted[4])))
+		return (free(cylinder), set_err_num(data, ERR_CYLINDER), false);
+	if (!(splitted[5] && parse_rgb(&(cylinder->rgb.r), &(cylinder->rgb.g),
+				&(cylinder->rgb.b), splitted[5])))
+		return (free(cylinder), set_err_num(data, ERR_CYLINDER), false);
 	if (splitted[6])
-		return (free(cy), printf("Error\nCylinder: too many args.\n"), false);
-	add_back_cylinder(&(data->cylinder_list), cy);
+		return (free(cylinder), set_err_num(data, ERR_CYLINDER), false);
+	add_back_cylinder(&(data->cylinder_list), cylinder);
 	return (true);
 }

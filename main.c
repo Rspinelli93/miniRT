@@ -20,7 +20,7 @@ int	main(int ac, char **av)
 		return (printf("Error\nWrong number of args\n"), 1);
 	memset_t_data(&data);
 	if (!parse(&data, av[1]))
-		return (free_data(&data), 1);
+		return (free_data(&data), print_error(data.err_num), 1);
 	if (!init_mlx(&data))
 		return (printf("Error\nInit mlx\n"), free_data(&data), 2);
 	create_space(&data);
@@ -41,7 +41,7 @@ int	main(int ac, char **av)
 		return (printf("Error\nWrong number of args"), 1);
 	memset_t_data(&data);
 	if (!parse(&data, av[2]))
-		return (free_data(&data), 1);
+		return (free_data(&data), print_error(data.err_num), 1);
 	return (free_data(&data), 0);
 }
 	*/

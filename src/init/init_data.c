@@ -6,23 +6,11 @@
 /*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 19:32:24 by rick              #+#    #+#             */
-/*   Updated: 2026/04/19 21:02:50 by glucken          ###   ########.fr       */
+/*   Updated: 2026/04/19 22:21:40 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minirt.h"
-
-t_data	*init_data(void)
-{
-	t_data	*data;
-
-	data = ft_calloc(sizeof(data), 1);
-	if (!data)
-		return (NULL);
-	if (init_mlx(data) != true)
-		return (false);
-	return (data);
-}
 
 void	memset_t_data(t_data *data)
 {
@@ -33,6 +21,7 @@ void	memset_t_data(t_data *data)
 	data->bits_per_pixel = 0;
 	data->line_length = 0;
 	data->endian = 0;
+	data->err_num = 0;
 	data->ambient = NULL;
 	data->camera = NULL;
 	data->light = NULL;
@@ -47,18 +36,18 @@ int	init_mlx(t_data *data)
 {
 	data->mlx = mlx_init();
 	if (!data->mlx)
-		return (printf("MLX INIT FAIL\n"), false);
+		return (false);
 	data->win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT,
 			"Welcome to a Magic World");
 	if (!data->win)
-		return (printf("NEW WIN FAIL\n"), false);
+		return (false);
 	data->img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!data->img)
-		return (printf("NEW IMG FAIL\n"), false);
+		return (false);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
 			&data->line_length, &data->endian);
 	if (!data->addr)
-		return (printf("GET ADDR FAIL\n"), false);
+		return (false);
 	return (true);
 }
 
