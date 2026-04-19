@@ -50,7 +50,7 @@ void	put_light_plane(t_data *data, t_plane plane,
 	point = point_from_cartesien(data->camera->origin, curr_dist, data->dir);
 	normal = plane.vector;
 	ray = vector_from_points(point, data->light->origin);
-	if (scalar_product(normal, ray) < 0)
+	if (scalar_product(normal, data->dir) > 0)
 	{
 		normal.x = -normal.x;
 		normal.y = -normal.y;
