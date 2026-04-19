@@ -73,26 +73,26 @@ bool	parse_plane(t_data *data, char **splitted)
 * Returns false on failure, in case of malloc fail.*/
 bool	parse_cylinder(t_data *data, char **splitted)
 {
-	t_cylinder	*cylinder;
+	t_cylinder	*cy;
 
-	cylinder = (t_cylinder *)ft_calloc(sizeof(t_cylinder), 1);
-	if (!cylinder)
+	cy = (t_cylinder *)ft_calloc(sizeof(t_cylinder), 1);
+	if (!cy)
 		return (printf("Error\nMalloc Fail\n"), false);
-	if (!(splitted[1] && parse_xyz(&(cylinder->center.x), &(cylinder->center.y),
-				&(cylinder->center.z), splitted[1])))
-		return (free(cylinder), printf("Error\nWrong Cylinder line.\n"), false);
-	if (!(splitted[2] && parse_xyz_norm(&(cylinder->vector.x),
-				&(cylinder->vector.y), &(cylinder->vector.z), splitted[2])))
-		return (free(cylinder), printf("Error\nWrong Cylinder line.\n"), false);
-	if (!(splitted[3] && parse_positive_nb(&(cylinder->diameter), splitted[3])))
-		return (free(cylinder), printf("Error\nWrong Cylinder line.\n"), false);
-	if (!(splitted[4] && parse_positive_nb(&(cylinder->height), splitted[4])))
-		return (free(cylinder), printf("Error\nWrong Cylinder line.\n"), false);
-	if (!(splitted[5] && parse_rgb(&(cylinder->rgb.r), &(cylinder->rgb.g),
-				&(cylinder->rgb.b), splitted[5])))
-		return (free(cylinder), printf("Error\nWrong Cylinder line.\n"), false);
+	if (!(splitted[1] && parse_xyz(&(cy->center.x), &(cy->center.y),
+				&(cy->center.z), splitted[1])))
+		return (free(cy), printf("Error\nWrong Cylinder line.\n"), false);
+	if (!(splitted[2] && parse_xyz_norm(&(cy->vector.x),
+				&(cy->vector.y), &(cy->vector.z), splitted[2])))
+		return (free(cy), printf("Error\nWrong Cylinder line.\n"), false);
+	if (!(splitted[3] && parse_positive_nb(&(cy->diameter), splitted[3])))
+		return (free(cy), printf("Error\nWrong Cylinder line.\n"), false);
+	if (!(splitted[4] && parse_positive_nb(&(cy->height), splitted[4])))
+		return (free(cy), printf("Error\nWrong Cylinder line.\n"), false);
+	if (!(splitted[5] && parse_rgb(&(cy->rgb.r), &(cy->rgb.g),
+				&(cy->rgb.b), splitted[5])))
+		return (free(cy), printf("Error\nWrong Cylinder line.\n"), false);
 	if (splitted[6])
-		return (free(cylinder), printf("Error\nCylinder: too many args.\n"), false);
-	add_back_cylinder(&(data->cylinder_list), cylinder);
+		return (free(cy), printf("Error\nCylinder: too many args.\n"), false);
+	add_back_cylinder(&(data->cylinder_list), cy);
 	return (true);
 }
