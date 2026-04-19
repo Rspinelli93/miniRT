@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 19:18:55 by rick              #+#    #+#             */
-/*   Updated: 2026/04/19 22:03:33 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/19 23:35:24 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,23 @@ void	trim_newlines(char **arr)
 {
 	int	i;
 	int	len;
+	int	j;
 
 	i = 0;
 	while (arr && arr[i])
 	{
+		j = 0;
+		while (arr[i][j])
+		{
+			if (arr[i][j] == '\t' || arr[i][j] == '\r')
+				arr[i][j] = ' ';
+			j++;
+		}
 		len = ft_strlen(arr[i]);
-		if (len > 1 && arr[i][len - 1] == '\n')
-			arr[i][len - 1] = '\0';
+		while (len > 0 && arr[i][len - 1] == '\n')
+			arr[i][--len] = '\0';
+		while (len > 0 && arr[i][len - 1] == ' ')
+			arr[i][--len] = '\0';
 		i++;
 	}
 }
@@ -61,7 +71,7 @@ void	print_error(int err_num)
 	if (err_num == 1)
 		printf("Error\nMalloc Fail\n");
 	if (err_num == 2)
-		printf("Error\nLine should start with A, C, L, sp, pl or cy.\n");
+		printf("Error\nLine should start with A, C, L, sp, pl, cy or co.\n");
 	if (err_num == 3)
 		printf("Error\nFile must have only one Camera, Ambient L or Light\n");
 	if (err_num == 4)
@@ -76,6 +86,8 @@ void	print_error(int err_num)
 		printf("Error\nWrong Plane line.\n");
 	if (err_num == 9)
 		printf("Error\nWrong Cylinder line.\n");
+	if (err_num == 10)
+		printf("Error\nWrong Cone line.\n");
 }
 
 void	set_err_num(t_data *data, int num)

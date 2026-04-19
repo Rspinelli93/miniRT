@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 19:13:18 by rick              #+#    #+#             */
-/*   Updated: 2026/04/19 21:33:08 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/19 23:17:26 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ static bool	validate_tokens(t_data *data, char **tokens)
 		return (parse_plane(data, tokens));
 	else if (!ft_strncmp("cy", tokens[0], 3))
 		return (parse_cylinder(data, tokens));
+	else if (!ft_strncmp("co", tokens[0], 3))
+		return (parse_cone(data, tokens));
 	else if (!ft_strncmp("\n", tokens[0], 2))
 		return (true);
 	return (set_err_num(data, ERR_INVALID_ID), false);

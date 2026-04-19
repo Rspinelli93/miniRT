@@ -28,6 +28,7 @@ void	put_light_sphere(t_data *data, t_sphere sphere,
 	t_vector	normal;
 	t_vector	ray;
 	t_point		point;
+	float		spec;
 
 	point = point_from_cartesien(data->camera->origin, curr_dist, data->dir);
 	normal = vector_from_points(sphere.center, point);
@@ -38,6 +39,8 @@ void	put_light_sphere(t_data *data, t_sphere sphere,
 	}
 	ray = vector_from_points(point, data->light->origin);
 	*color = color_to_light(data, *color, angle_vect(normal, ray));
+	spec = phong_specular(data, normal, ray);
+	*color = add_white_specular(*color, spec);
 }
 
 void	put_light_plane(t_data *data, t_plane plane,
@@ -46,6 +49,7 @@ void	put_light_plane(t_data *data, t_plane plane,
 	t_vector	normal;
 	t_vector	ray;
 	t_point		point;
+	float		spec;
 
 	point = point_from_cartesien(data->camera->origin, curr_dist, data->dir);
 	normal = plane.vector;
@@ -57,6 +61,8 @@ void	put_light_plane(t_data *data, t_plane plane,
 		normal.z = -normal.z;
 	}
 	*color = color_to_light(data, *color, angle_vect(normal, ray));
+	spec = phong_specular(data, normal, ray);
+	*color = add_white_specular(*color, spec);
 }
 
 void	put_light_cylinder(t_data *data, t_cylinder cyl, float curr_dist,
@@ -66,6 +72,7 @@ void	put_light_cylinder(t_data *data, t_cylinder cyl, float curr_dist,
 	t_vector	ray;
 	t_point		point;
 	float		m;
+	float		spec;
 
 	point = point_from_cartesien(data->camera->origin, curr_dist, data->dir);
 	m = scalar_product(data->dir, cyl.vector) * curr_dist
@@ -77,4 +84,6 @@ void	put_light_cylinder(t_data *data, t_cylinder cyl, float curr_dist,
 	normal = normalized(normal);
 	ray = vector_from_points(point, data->light->origin);
 	*color = color_to_light(data, *color, angle_vect(normal, ray));
+	spec = phong_specular(data, normal, ray);
+	*color = add_white_specular(*color, spec);
 }

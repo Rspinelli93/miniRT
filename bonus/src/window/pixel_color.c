@@ -6,7 +6,7 @@
 /*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 18:49:43 by rick              #+#    #+#             */
-/*   Updated: 2026/04/13 19:00:41 by glucken          ###   ########.fr       */
+/*   Updated: 2026/04/19 23:17:26 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	check_planes(t_data *data, int *color, t_point src, t_vector dir);
 static void	check_spheres(t_data *data, int *color, t_point src, t_vector dir);
 static void	check_cylinders(t_data *data, int *color,
 				t_point src, t_vector dir);
+static void	check_cones(t_data *data, int *color, t_point src, t_vector dir);
 
 /*
 * Function to change the value of the color of the current pixel in data.
@@ -26,12 +27,17 @@ static void	check_cylinders(t_data *data, int *color,
 */
 void	set_color_pixel(t_data *data)
 {
-	int	color;
+	int		color;
+	t_color	bg;
 
-	color = get_hex_color(&(data->ambient->rgb));
+	bg.r = data->ambient->rgb.r * data->ambient->light_ratio;
+	bg.g = data->ambient->rgb.g * data->ambient->light_ratio;
+	bg.b = data->ambient->rgb.b * data->ambient->light_ratio;
+	color = get_hex_color(&bg);
 	check_spheres(data, &color, data->camera->origin, data->dir);
 	check_planes(data, &color, data->camera->origin, data->dir);
 	check_cylinders(data, &color, data->camera->origin, data->dir);
+	check_cones(data, &color, data->camera->origin, data->dir);
 	data->color_pixel = color;
 }
 
@@ -116,6 +122,31 @@ static void	check_planes(t_data *data, int *color, t_point src, t_vector dir)
 				*color = color_to_shadow(data, *color);
 			else
 				put_light_plane(data, *temp, curr_dist, color);
+			data->distance = curr_dist;
+		}
+		temp = temp->next;
+	}
+}
+
+static void	check_cones(t_data *data, int *color, t_point src, t_vector dir)
+{
+	t_cone	*temp;
+	float	curr_dist;
+
+	temp = data->cone_list;
+	curr_dist = -1;
+	if (!temp)
+		return ;
+	while (temp)
+	{
+		curr_dist = distance_cone(*temp, src, dir);
+		if (curr_dist < data->distance && curr_dist > 0)
+		{
+			*color = get_hex_color(&(temp->rgb));
+			if (check_coalition(data, curr_dist))
+				*color = color_to_shadow(data, *color);
+			else
+				put_light_cone(data, *temp, curr_dist, color);
 			data->distance = curr_dist;
 		}
 		temp = temp->next;

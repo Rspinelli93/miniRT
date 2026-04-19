@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:05:00 by rick              #+#    #+#             */
-/*   Updated: 2026/04/13 21:58:57 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/19 23:35:24 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minirt.h"
 
-static void	free_cylinder_list(t_data *data);
-static void	free_sphere_list(t_data *data);
-static void	free_plane_list(t_data *data);
+void		free_objects_lists(t_data *data);
 
 /*
 * Utility to free all allocated memory in data.*/
@@ -25,9 +23,7 @@ void	free_data(t_data *data)
 	free_and_null((void **)&data->ambient);
 	free_and_null((void **)&data->camera);
 	free_and_null((void **)&data->light);
-	free_sphere_list(data);
-	free_plane_list(data);
-	free_cylinder_list(data);
+	free_objects_lists(data);
 }
 
 /*
@@ -45,46 +41,4 @@ int	close_mlx(t_data *data)
 	}
 	free_data(data);
 	exit(0);
-}
-
-/*
-* Utility to free linked list of spheres.*/
-static void	free_sphere_list(t_data *data)
-{
-	t_sphere	*tmp;
-
-	while (data->sphere_list)
-	{
-		tmp = data->sphere_list->next;
-		free(data->sphere_list);
-		data->sphere_list = tmp;
-	}
-}
-
-/*
-* Utility to free linked list of planes.*/
-static void	free_plane_list(t_data *data)
-{
-	t_plane	*tmp;
-
-	while (data->plane_list)
-	{
-		tmp = data->plane_list->next;
-		free(data->plane_list);
-		data->plane_list = tmp;
-	}
-}
-
-/*
-* Utility to free linked list of cylinders.*/
-static void	free_cylinder_list(t_data *data)
-{
-	t_cylinder	*tmp;
-
-	while (data->cylinder_list)
-	{
-		tmp = data->cylinder_list->next;
-		free(data->cylinder_list);
-		data->cylinder_list = tmp;
-	}
 }

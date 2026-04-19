@@ -8,8 +8,11 @@ SRCS        = main.c \
 			  src/window/pixel_color.c \
 			  src/window/viewport.c \
 			  src/window/distance_objects.c \
+			  src/window/distance_cone.c \
 			  src/window/pixel_shadow.c \
 			  src/window/put_light.c \
+			  src/window/put_light_cone.c \
+			  src/window/phong_light.c \
 			  src/parsing/parse.c \
 			  src/parsing/parse_shapes.c \
 			  src/parsing/parse_ambient.c \
@@ -18,10 +21,12 @@ SRCS        = main.c \
 			  src/parsing/ft_atof.c \
 			  src/utils/utils1.c \
 			  src/utils/utils2.c \
+			  src/utils/utils3.c \
 			  src/utils/utils_maths1.c \
 			  src/utils/utils_maths2.c \
 			  src/utils/utils_color.c \
 			  src/free/free.c \
+			  src/free/free_lists.c \
 			  src/free/free_utils.c \
 			  gnl/get_next_line.c \
 			  gnl/get_next_line_utils.c

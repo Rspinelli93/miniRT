@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 20:38:39 by rick              #+#    #+#             */
-/*   Updated: 2026/04/19 22:05:19 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/19 23:17:26 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_light			t_light;
 typedef struct s_sphere			t_sphere;
 typedef struct s_plane			t_plane;
 typedef struct s_cylinder		t_cylinder;
+typedef struct s_cone			t_cone;
 typedef struct s_vector			t_vector;
 typedef struct s_space			t_space;
 typedef struct s_point			t_point;
@@ -36,7 +37,8 @@ typedef enum e_err
 	ERR_LIGHT,
 	ERR_SPHERE,
 	ERR_PLANE,
-	ERR_CYLINDER
+	ERR_CYLINDER,
+	ERR_CONE
 }	t_err;
 
 struct s_vector
@@ -69,6 +71,7 @@ struct s_data
 	t_sphere		*sphere_list;
 	t_plane			*plane_list;
 	t_cylinder		*cylinder_list;
+	t_cone			*cone_list;
 	t_space			camera_space;
 	int				color_pixel;
 	float			distance;
@@ -133,6 +136,16 @@ struct s_cylinder
 	t_color		rgb;
 	t_vector	vector;
 	t_cylinder	*next;
+};
+
+struct s_cone
+{
+	float		diameter;
+	float		height;
+	t_point		apex;
+	t_color		rgb;
+	t_vector	vector;
+	t_cone		*next;
 };
 
 #endif

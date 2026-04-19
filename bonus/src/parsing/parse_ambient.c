@@ -107,10 +107,19 @@ bool	parse_light(t_data *data, char **splitted)
 	if (!(splitted[2] && parse_ratio_light(&(data->light->brightness),
 				splitted[2])))
 		return (set_err_num(data, ERR_LIGHT), false);
-	if (!(splitted[3] && parse_rgb(&(data->light->rgb.r), &(data->light->rgb.g),
-				&(data->light->rgb.b), splitted[3])))
-		return (set_err_num(data, ERR_LIGHT), false);
-	if (splitted[4])
-		return (set_err_num(data, ERR_LIGHT), false);
+	if (splitted[3])
+	{
+		if (!parse_rgb(&(data->light->rgb.r), &(data->light->rgb.g),
+				&(data->light->rgb.b), splitted[3]))
+			return (set_err_num(data, ERR_LIGHT), false);
+		if (splitted[4])
+			return (set_err_num(data, ERR_LIGHT), false);
+	}
+	else
+	{
+		data->light->rgb.r = 255;
+		data->light->rgb.g = 255;
+		data->light->rgb.b = 255;
+	}
 	return (true);
 }

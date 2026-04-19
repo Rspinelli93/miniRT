@@ -96,3 +96,31 @@ bool	parse_cylinder(t_data *data, char **splitted)
 	add_back_cylinder(&(data->cylinder_list), cylinder);
 	return (true);
 }
+
+bool	parse_cone(t_data *data, char **splitted)
+{
+	t_cone	*cone;
+
+	cone = (t_cone *)ft_calloc(sizeof(t_cone), 1);
+	if (!cone)
+		return (set_err_num(data, ERR_MALLOC), false);
+	if (!(splitted[1] && parse_xyz(&(cone->apex.x), &(cone->apex.y),
+				&(cone->apex.z), splitted[1])))
+		return (free(cone), set_err_num(data, ERR_CONE), false);
+	if (!(splitted[2] && parse_xyz_norm(&(cone->vector.x), &(cone->vector.y),
+				&(cone->vector.z), splitted[2])))
+		return (free(cone), set_err_num(data, ERR_CONE), false);
+	if (!(splitted[3] && parse_positive_nb(&(cone->diameter), splitted[3])))
+		return (free(cone), set_err_num(data, ERR_CONE), false);
+	if (!(splitted[4] && parse_positive_nb(&(cone->height), splitted[4])))
+		return (free(cone), set_err_num(data, ERR_CONE), false);
+	if (cone->diameter <= 0 || cone->height <= 0)
+		return (free(cone), set_err_num(data, ERR_CONE), false);
+	if (!(splitted[5] && parse_rgb(&(cone->rgb.r), &(cone->rgb.g),
+				&(cone->rgb.b), splitted[5])))
+		return (free(cone), set_err_num(data, ERR_CONE), false);
+	if (splitted[6])
+		return (free(cone), set_err_num(data, ERR_CONE), false);
+	add_back_cone(&(data->cone_list), cone);
+	return (true);
+}

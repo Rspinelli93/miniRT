@@ -6,7 +6,7 @@
 /*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 19:32:24 by rick              #+#    #+#             */
-/*   Updated: 2026/04/19 22:21:40 by glucken          ###   ########.fr       */
+/*   Updated: 2026/04/19 23:17:26 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	memset_t_data(t_data *data)
 	data->sphere_list = NULL;
 	data->plane_list = NULL;
 	data->cylinder_list = NULL;
+	data->cone_list = NULL;
 	data->color_pixel = -1;
 	data->distance = __FLT_MAX__;
 }

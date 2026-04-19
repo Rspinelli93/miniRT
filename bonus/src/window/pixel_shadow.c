@@ -6,19 +6,11 @@
 /*   By: glucken <glucken@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 14:21:55 by rick              #+#    #+#             */
-/*   Updated: 2026/04/13 19:01:27 by glucken          ###   ########.fr       */
+/*   Updated: 2026/04/19 23:35:24 by glucken          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minirt.h"
-
-float	distance_ab(t_point a, t_point b)
-{
-	t_vector	vector;
-
-	vector = vector_from_points(a, b);
-	return (norm_l2(vector));
-}
 
 /*
 * This function will iterate on the sphere list and check on the
@@ -38,7 +30,7 @@ static bool	spheres_shadow(t_data *data, t_point src, t_vector dir)
 	{
 		curr_dist = distance_sphere(*temp, src, dir);
 		if (curr_dist > 0.001 && curr_dist
-			< distance_ab(data->light->origin, src))
+			< norm_l2(vector_from_points(data->light->origin, src)))
 			return (true);
 		temp = temp->next;
 	}
@@ -63,7 +55,7 @@ static bool	cylinders_shadow(t_data *data, t_point src, t_vector dir)
 	{
 		curr_dist = distance_cylinder(*temp, src, dir);
 		if (curr_dist > 0.001 && curr_dist
-			< distance_ab(data->light->origin, src))
+			< norm_l2(vector_from_points(data->light->origin, src)))
 			return (true);
 		temp = temp->next;
 	}
@@ -88,7 +80,27 @@ static bool	planes_shadow(t_data *data, t_point src, t_vector dir)
 	{
 		curr_dist = distance_plane(*temp, src, dir);
 		if (curr_dist > 0.001 && curr_dist
-			< distance_ab(data->light->origin, src))
+			< norm_l2(vector_from_points(data->light->origin, src)))
+			return (true);
+		temp = temp->next;
+	}
+	return (false);
+}
+
+static bool	cones_shadow(t_data *data, t_point src, t_vector dir)
+{
+	t_cone	*temp;
+	float	curr_dist;
+
+	temp = data->cone_list;
+	curr_dist = -1;
+	if (!temp)
+		return (false);
+	while (temp)
+	{
+		curr_dist = distance_cone(*temp, src, dir);
+		if (curr_dist > 0.001 && curr_dist
+			< norm_l2(vector_from_points(data->light->origin, src)))
 			return (true);
 		temp = temp->next;
 	}
@@ -103,9 +115,13 @@ bool	check_coalition(t_data *data, float distance)
 	src = point_from_cartesien(data->camera->origin, distance, data->dir);
 	dir = vector_from_points(src, data->light->origin);
 	dir = normalized(dir);
+	src.x += dir.x * 0.01f;
+	src.y += dir.y * 0.01f;
+	src.z += dir.z * 0.01f;
 	if (planes_shadow(data, src, dir)
 		|| cylinders_shadow(data, src, dir)
-		|| spheres_shadow(data, src, dir))
+		|| spheres_shadow(data, src, dir)
+		|| cones_shadow(data, src, dir))
 		return (true);
 	return (false);
 }
