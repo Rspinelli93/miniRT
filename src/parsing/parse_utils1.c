@@ -14,27 +14,27 @@
 
 bool	parse_rgb(int *r, int *g, int *b, char *str)
 {
-	char	**rgb;
+	char	**s_rgb;
 	int		i;
 	int		rgb[3];
 
-	rgb = ft_split(str, ',');
-	if (!rgb)
+	s_rgb = ft_split(str, ',');
+	if (!s_rgb)
 		return (printf("Error\nMalloc Fail\n"), false);
 	i = 0;
-	while (rgb[i] && i < 3)
+	while (s_rgb[i] && i < 3)
 	{
-		if (is_valid_int(rgb[i]) && ft_atoi(rgb[i]) >= 0
-			&& ft_atoi(rgb[i]) <= 255)
-			rgb[i] = ft_atoi(rgb[i]);
+		if (is_valid_int(s_rgb[i]) && ft_atoi(s_rgb[i]) >= 0
+			&& ft_atoi(s_rgb[i]) <= 255)
+			rgb[i] = ft_atoi(s_rgb[i]);
 		else
-			return (free_split(rgb), printf("Error\nWrong color code\n"),
+			return (free_split(s_rgb), printf("Error\nWrong color code\n"),
 				false);
 		i++;
 	}
-	if (i != 3 || rgb[i])
-		return (free_split(rgb), printf("Error\nWrong color code\n"), false);
-	free_split(rgb);
+	if (i != 3 || s_rgb[i])
+		return (free_split(s_rgb), printf("Error\nWrong color code\n"), false);
+	free_split(s_rgb);
 	*r = rgb[0];
 	*g = rgb[1];
 	*b = rgb[2];
