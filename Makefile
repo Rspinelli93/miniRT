@@ -2,7 +2,6 @@ NAME        = miniRT
 
 # --- Manual File Listing ---
 SRCS        = main.c \
-			  src/init/initalisation.c \
 			  src/init/init_data.c \
 			  src/init/init_ambient.c \
 			  src/window/my_mlx_functions.c \

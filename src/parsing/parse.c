@@ -6,7 +6,7 @@
 /*   By: rick <rick@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 19:13:18 by rick              #+#    #+#             */
-/*   Updated: 2026/04/13 21:19:14 by rick             ###   ########.fr       */
+/*   Updated: 2026/04/19 21:33:08 by rick             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ bool	parse(t_data *data, char *doc)
 	i = 0;
 	tokens = NULL;
 	if (!check_valid_file_type(doc))
-		return (printf("Error\nWrong file type\n"), false);
+		return (printf("Error\nWrong file\n"), false);
 	lines = get_text(doc);
 	if (!lines)
 		return (false);
 	if (!check_acl(lines))
-		return (free_split(lines), printf("Error\nWrong amount of ACL\n"),
+		return (free_split(lines),
+			printf("Error\nWrong A, C, or L count\n"),
 			false);
 	while (lines && lines[i])
 	{
@@ -70,8 +71,7 @@ static bool	validate_tokens(t_data *data, char **tokens)
 		return (parse_cylinder(data, tokens));
 	else if (!ft_strncmp("\n", tokens[0], 2))
 		return (true);
-	printf("Error\nLine should start with A, C, L, sp, pl or cy.\n");
-	return (false);
+	return (set_err_num(data, ERR_INVALID_ID), false);
 }
 
 /*
