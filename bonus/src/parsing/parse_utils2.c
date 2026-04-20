@@ -38,8 +38,9 @@ bool	parse_ratio_light(float *ratio, char *str)
 		if (tmp < (float) 0 || tmp > (float) 1)
 			return (false);
 		*ratio = tmp;
+		return (true);
 	}
-	return (true);
+	return (false);
 }
 
 bool	parse_positive_nb(float *nb, char *str)

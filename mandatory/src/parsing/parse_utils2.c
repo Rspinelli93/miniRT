@@ -34,7 +34,6 @@ bool	parse_ratio_light(float *ratio, char *str)
 
 	if (is_valid_float(str))
 	{
-		printf("%s\n",str);
 		tmp = ft_atof((const char *)str);
 		if (tmp < (float) 0 || tmp > (float) 1)
 			return (false);
