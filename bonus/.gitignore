@@ -1,0 +1,6 @@
+miniRT
+*.o
+*.a
+tests/invalid
+tests/valid
+obj/

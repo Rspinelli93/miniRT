@@ -1,6 +1,9 @@
 miniRT
 *.o
 *.a
-tests/invalid
-tests/valid
-obj/
+mandatory/tests/invalid
+mandatorytests/valid
+bonus/tests/invalid
+bonus/tests/valid
+mandatory/obj/
+bonus/obj
