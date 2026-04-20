@@ -19,6 +19,7 @@
 # define KEY_ESC 65307
 # define SUCCESS 1
 # define FAILURE 0
+# define PHONG 16
 
 # include <unistd.h>
 # include <stdlib.h>

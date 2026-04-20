@@ -56,5 +56,5 @@ float	phong_specular(t_data *data, t_vector normal, t_vector ray)
 	dot_rv = scalar_product(reflect_dir, view_dir);
 	if (dot_rv <= 0.0f)
 		return (0.0f);
-	return (powf(dot_rv, 48.0f) * data->light->brightness * 0.8f);
+	return (powf(dot_rv, PHONG) * data->light->brightness * 0.8f);
 }
