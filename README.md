@@ -253,3 +253,5 @@ Then run the executable `miniRT` + `[test-address]`
 You can find tests in the `./tests` folder and generate them with the .sh script located there.
 
 Have fun :D
+
+![miniRT render](miniRT-pic.png)
