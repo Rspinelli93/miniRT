@@ -1,32 +1,33 @@
-*This project has been created as part of the 42 curriculum by glucken and rspinell*
+# miniRT
 
-# miniRT: My First Ray Tracer
+A collaborative ray tracer written in C by glucken and rspinell. It parses scene files and renders spheres, planes, cylinders, and cones with ambient, diffuse, and specular lighting and shadows.
 
-## 📝 Description
+**42 Common Core · Rank 04 · Graphics branch** · [Curriculum hub](https://github.com/Rspinelli93/42-Common-Core)
 
-**miniRT** is a minimalist ray tracing engine developed in **C**. The idea of the project is to render an image by calculating distances from the perspective of the viewer till the objects placed in front of them and then render all in a viewport.
-The objects are generated according to the distance from the viewport, the color input and the ambient color, as well as the shadows, according to the direction of the light source.
+## Build and render
 
-### 🚀 Features
+The checked-in build targets Linux with MiniLibX, X11/Xext development libraries, Make, and a C compiler. A graphical X11 session is required to display the image. MiniLibX sources are included in `minilibx_linux/`.
 
-* **Window Management:** using the **MiniLibX** library..
-* **Geometric Primitives:**
-    * **Plane:** Infinite surfaces with specific orientations.
-    * **Sphere:** Perfect curved surfaces defined by a center and diameter.
-    * **Cylinder:** Finite objects with a radius and height.
-    * **Cone:** Finite cone defined by an apex, axis, diameter, and height.
-* **Lighting & Color:**
-    * **Ambient Lighting:** Global light to ensure no part of the scene is pitch black.
-    * **Diffuse Reflection:** Light intensity based on the angle of incidence (Lambertian).
-    * **Specular Reflection (Phong):** Bright highlight based on view direction.
-    * **Colored Light Source:** Diffuse light is tinted by light RGB and scaled by brightness.
-    * **Shadows:** Objects accurately block light sources.
-* **Camera:** Fully adjustable view point, direction, and Field of View (FOV).
-* **Scene Parsing:** Reads `.rt` files to define objects, lights, and camera settings.
+```bash
+git clone https://github.com/Rspinelli93/miniRT.git
+cd miniRT
+make
+./miniRT tests/eval/00_config/valid_minimal.rt
+```
 
-## 🛠 Technical Choices
+Run from the repository root. Scene files define the camera, ambient illumination, light, and geometric objects. More fixtures are grouped in `tests/eval/` for configuration, primitives, transformations, and other rendering cases.
 
-The engine follows a **ray-casting** approach: one ray is fired from the camera for each pixel. We implemented a small linear-algebra toolkit to handle vector operations (addition, normalization, cross product, dot product, and vector angles). The core rendering logic solves geometric equations to find the closest intersection point $t$ for spheres, planes, cylinders, and cones. A lighting model combining ambient, Lambert diffuse, Phong specular, and shadows is then applied.
+## How it works
+
+The renderer builds a camera basis and sends a ray through each pixel. It solves object intersections, chooses the closest visible hit, and combines ambient, Lambert diffuse, and Phong specular terms with shadow checks.
+
+The implementation supports sphere, plane, cylinder, and cone intersections. This README describes the checked-in implementation; it does not imply that every feature is required by the mandatory subject.
+
+## Credits
+
+Created as part of the 42 curriculum by **glucken and rspinell**. This is a shared project with [G-Lck](https://github.com/G-Lck).
+
+![A render produced by miniRT](miniRT-pic.png)
 
 ## 📐 Maths
 
@@ -238,20 +239,3 @@ self-shadow artifacts (shadow acne).
 
 </details>
 
-## 💻 Instructions
-
-### Compilation
-
-To compile the project and generate the `miniRT` executable, run:
-
-```bash
-make
-```
-
-Then run the executable `miniRT` + `[test-address]`
-
-You can find tests in the `./tests` folder and generate them with the .sh script located there.
-
-Have fun :D
-
-![miniRT render](miniRT-pic.png)
